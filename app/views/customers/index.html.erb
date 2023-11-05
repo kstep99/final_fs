@@ -1,0 +1,14 @@
+<!-- This is app/views/customers/index.html.erb -->
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Customers</h1>
+    <div class="columns is-multiline">
+      <% @customers.each do |customer| %>
+        <div class="column is-one-third">
+          <%= render 'customers/customer', customer: customer %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
