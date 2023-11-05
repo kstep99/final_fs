@@ -4,8 +4,9 @@
   <div class="container">
     <h1 class="title">Customers</h1>
     <div class="columns is-multiline">
-      <% @customers.each do |customer| %>
+      <% @alphabetized_customers.each do |customer| %>
         <div class="column is-one-third">
+          <!-- Ensure the partial path is correct -->
           <%= render 'customers/customer', customer: customer %>
         </div>
       <% end %>
