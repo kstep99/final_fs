@@ -1,11 +1,18 @@
 <!-- app/views/products/index.html.erb -->
+<%= form_with(url: products_path, method: :get, local: true) do |form| %>
+  <%= form.label :category_id, "Choose a category:" %>
+  <%= form.collection_select(:category_id, Category.all, :id, :name, include_blank: true) %>
+  <%= form.submit "Filter" %>
+<% end %>
+
 <div class="products">
-  <!-- Add a Sign In button/link -->
   <%= link_to 'Sign In', new_customer_session_path, class: 'button is-primary' %>
 
   <% @products.each do |product| %>
     <div class="product">
-      <h3><%= product.name %></h3>
+      <!-- Each product name is a link to the product's show page -->
+      <%= link_to product.name, product_path(product), class: 'product-name' %>
+
       <% if product.images.attached? %>
         <% product.images.each do |image| %>
           <%= image_tag(image, size: "100x100") %> <!-- Adjust size as needed -->
@@ -15,4 +22,7 @@
       <!-- Any other product details you want to display -->
     </div>
   <% end %>
+
+  <!-- Pagination Links -->
+  <%= paginate @products %>
 </div>

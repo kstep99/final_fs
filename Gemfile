@@ -45,7 +45,8 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem 'sassc-rails'
 
-
+# Gem for pagination
+gem 'kaminari'
 
 
 # project gems added at start of project

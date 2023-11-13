@@ -1,16 +1,16 @@
-# config/routes.rb
-
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :customers
 
   # Define a route for the dashboard controller's index action
-  # You only need this line once, and it should have a unique name.
   get 'dashboard/index', as: :dashboard_index
 
- # This sets the root to the products index page
- root 'products#index'
+  # This sets the root to the products index page
+  root 'products#index'
+
+  # Routes for products
+  resources :products, only: [:index, :show] # Add other actions as needed
 
   # Resourceful routes for customers
   resources :customers do
