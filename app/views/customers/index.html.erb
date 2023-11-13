@@ -1,10 +1,10 @@
 <!-- app/views/customers/index.html.erb -->
 <div class="columns is-multiline">
-  <% @customers.each do |customer| %>
+  <% @alphabetized_customers.each do |customer| %>
     <div class="column is-one-third">
       <div class="customer">
         <!-- Display the customer information directly -->
-        <p>Name: <%= customer.name %></p>
+        <p>Name: <%= customer.full_name %></p>
         <p>Email: <%= customer.email %></p>
         <!-- Any other customer details you want to display -->
       </div>

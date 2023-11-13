@@ -1,8 +1,8 @@
 class Customer < ApplicationRecord
   # Includes Devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :trackable and :omniauthable, ,
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :validatable, :timeoutable, :rememberable
 
   # Active Storage association for the image
   has_one_attached :image
