@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :customers
 
+  # Define a route for the dashboard controller's index action
+  # You only need this line once, and it should have a unique name.
+  get 'dashboard/index', as: :dashboard_index
+
   # This sets the customers index as the homepage for your app
   root 'customers#index'
 

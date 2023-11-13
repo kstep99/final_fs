@@ -1,15 +1,13 @@
-<!-- This is app/views/customers/index.html.erb -->
-
-<section class="section">
-  <div class="container">
-    <h1 class="title">Customers</h1>
-    <div class="columns is-multiline">
-      <% @alphabetized_customers.each do |customer| %>
-        <div class="column is-one-third">
-          <!-- Ensure the partial path is correct -->
-          <%= render 'customers/customer', customer: customer %>
-        </div>
-      <% end %>
+<!-- app/views/customers/index.html.erb -->
+<div class="columns is-multiline">
+  <% @customers.each do |customer| %>
+    <div class="column is-one-third">
+      <div class="customer">
+        <!-- Display the customer information directly -->
+        <p>Name: <%= customer.name %></p>
+        <p>Email: <%= customer.email %></p>
+        <!-- Any other customer details you want to display -->
+      </div>
     </div>
-  </div>
-</section>
+  <% end %>
+</div>
