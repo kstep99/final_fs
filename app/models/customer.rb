@@ -8,9 +8,10 @@ class Customer < ApplicationRecord
   has_one_attached :image
 
   # Validations
-  validates :full_name, presence: true
+  validates :full_name, presence: true, allow_blank: true
+
   # Ensures the email is unique and allows it to be blank (if your application logic requires it)
-  validates :email, uniqueness: true, allow_blank: true
+  validates :email, uniqueness: true, allow_blank: false
 
   # Add phone number format validation (the regex can be adjusted as needed)
   validates :phone_number, format: { with: /\A(\+\d{1,3}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\z/ }, allow_blank: true
