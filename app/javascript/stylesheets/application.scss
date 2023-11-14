@@ -1,1 +1,48 @@
 @import '~bulma/bulma';
+
+// Increase specificity by repeating the class
+.navbar.navbar {
+  background-color: #333; // Set the background color to grey
+}
+
+// Ensure the text color is white
+.navbar-item, .navbar-link {
+  color: white !important; // The !important flag can help override other styles
+}
+
+
+.navbar-item:hover, .navbar-link:hover {
+  background-color: #111; // Darken the item on hover
+}
+
+// Bulma uses classes for its elements, so you don't need to style the 'ul' and 'li' directly if you use the correct Bulma classes
+// However, if you need to apply specific styles, add a class to the 'ul' or 'li' in your HTML and reference it here
+
+.user-info {
+  color: rgb(191, 172, 255);
+  // The '.user-info' class should be added to the container that holds the user information elements
+}
+
+// Since you're using Bulma, you don't need to import Bootstrap just for the modal; Bulma has its own modal component
+// If you still want to use Bootstrap's modal, then keep the import
+// @import "bootstrap";
+
+// Custom styling for pagination
+.pagination {
+  .pagination-link, .pagination-ellipsis {
+    padding: 8px 12px; // Adjust for more padding
+    margin-right: 4px;
+    border-radius: 4px; // Rounded corners
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #7d1515; // Light gray background on hover
+    }
+  }
+
+  .pagination-link.is-current, .pagination-link.is-current:hover {
+    background-color: #4a4a4a; // Active page link color (Darker grey)
+    border-color: #4a4a4a;
+    color: white !important; // White text for active page link
+  }
+}

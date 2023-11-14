@@ -15,22 +15,38 @@
   </head>
 
   <body>
-    <% if customer_signed_in? %>
+    <header>
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <%= link_to 'Home', root_path, class: 'navbar-item' %>
-          <!-- other navbar items can be added here -->
+          <!-- Your brand/logo here -->
+          <%= link_to 'FullStack FINAL', root_path, class: 'navbar-item' %>
+          <!-- Add a burger icon for mobile here if needed -->
         </div>
 
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <%= link_to 'Sign out', destroy_customer_session_path, method: :delete, class: 'button is-light' %>
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item"><%= 'About' %></a>
+            <a class="navbar-item"><%= 'Contact' %></a>
+            <a class="navbar-item"><%='Shop' %></a>
+            <a class="navbar-item"><%='Home' %></a>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <%= render 'partials/search' %>
             </div>
+
+            <% if customer_signed_in? %>
+              <div class="navbar-item">
+                <div class="buttons">
+                  <%# <%= link_to 'Sign out', destroy_customer_session_path, method: :delete, class: 'button is-light' %>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </nav>
-    <% end %>
+    </header>
 
     <%= yield %>
   </body>

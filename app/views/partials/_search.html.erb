@@ -1,0 +1,15 @@
+<%= form_with(url: products_path, method: :get, local: true, class: "is-flex is-align-items-center") do |form| %>
+  <div class="field has-addons">
+         <div class="control">
+      <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: 'All Categories', class: "select" %>
+    </div>
+    <div class="control">
+      <%= form.text_field :keyword, placeholder: 'Enter keyword', class: "input" %>
+    </div>
+
+    <div class="control">
+      <%= form.submit 'Search', class: "button is-info" %>
+    </div>
+
+  </div>
+<% end %>
