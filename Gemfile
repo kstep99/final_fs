@@ -48,6 +48,8 @@ gem 'sassc-rails'
 # Gem for pagination
 gem 'kaminari'
 
+gem 'bulma-rails', '~> 0.9.1'
+
 
 # project gems added at start of project
 gem 'activeadmin'

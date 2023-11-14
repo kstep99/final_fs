@@ -85,6 +85,8 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bulma-rails (0.9.4)
+      sassc (~> 2.0)
     capybara (3.39.2)
       addressable
       matrix
@@ -288,6 +290,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootsnap
+  bulma-rails (~> 0.9.1)
   capybara
   debug
   devise
