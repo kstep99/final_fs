@@ -50,6 +50,8 @@ gem 'kaminari'
 
 gem 'bulma-rails', '~> 0.9.1'
 
+gem 'webpacker'
+
 
 # project gems added at start of project
 gem 'activeadmin'
