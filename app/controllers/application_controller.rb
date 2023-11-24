@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     when AdminUser
       admin_dashboard_path # This path is provided by Active Admin
     when Customer
-      dashboard_index_path # This should match the path you have in routes.rb
+      root_path # Redirect customers to the products page (root path) after login
     else
       super
     end

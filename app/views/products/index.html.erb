@@ -1,6 +1,17 @@
 <!-- app/views/products/index.html.erb -->
 
-<!-- Bulma styled form -->
+<!-- Customer Dashboard Section -->
+<% if customer_signed_in? %>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Customer Dashboard</h1>
+      <p>Hello, <%= current_customer.email %></p>
+      <!-- Include other dashboard info here -->
+    </div>
+  </section>
+<% end %>
+
+<!-- Bulma styled filter form -->
 <div class="section">
   <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
     <div class="field">
@@ -17,32 +28,35 @@
   <% end %>
 </div>
 
-<!-- Products display -->
-<div class="section">
-  <%= link_to 'Sign In', new_customer_session_path, class: 'button is-primary' %>
+<!-- Products Listing Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="title">Our Products</h2>
+    <%= link_to 'Sign In', new_customer_session_path, class: 'button is-primary' %>
 
-  <div class="columns is-multiline">
-    <% @products.each do |product| %>
-      <div class="column is-one-quarter">
-        <div class="card">
-          <div class="card-content">
-            <%= link_to product.name, product_path(product), class: 'product-name title is-5' %>
+    <div class="columns is-multiline">
+      <% @products.each do |product| %>
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <%= link_to product.name, product_path(product), class: 'product-name title is-5' %>
 
-            <% if product.images.attached? %>
-              <% product.images.each do |image| %>
-                <figure class="image is-4by3">
-                  <%= image_tag(image, class: "is-rounded") %> <!-- Adjusted for Bulma -->
-                </figure>
+              <% if product.images.attached? %>
+                <% product.images.each do |image| %>
+                  <figure class="image is-4by3">
+                    <%= image_tag(image, class: "is-rounded") %> <!-- Adjusted for Bulma -->
+                  </figure>
+                <% end %>
               <% end %>
-            <% end %>
-            <p class="subtitle is-6"><%= number_to_currency(product.price) %></p>
-            <!-- Any other product details you want to display -->
+              <p class="subtitle is-6"><%= number_to_currency(product.price) %></p>
+              <!-- Any other product details you want to display -->
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
-  <!-- Pagination Links -->
-  <%= paginate @products, theme: 'bulma' %>
-</div>
+    <!-- Pagination Links -->
+    <%= paginate @products, theme: 'bulma' %>
+  </div>
+</section>
