@@ -1,6 +1,7 @@
+  <%# this is mostly just the customer sign in/ name id display setup %>
 <section class="section">
   <div class="container">
-    <h1 class="title">Welcome to the Customer Dashboard</h1>
+    <%# <h1 class="title">Welcome to the Customer Dashboard</h1> %>
     <% if customer_signed_in? %>
       <p class="user-info">Hello, <%= current_customer.email %></p>
       <%= link_to 'Sign out', destroy_customer_session_path, method: :delete, class: 'button is-light' %>

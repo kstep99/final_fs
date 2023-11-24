@@ -2,7 +2,9 @@
 
 // Increase specificity by repeating the class
 .navbar.navbar {
-  background-color: #333; // Set the background color to grey
+  background-color: #000000; // Set the background color to grey
+  padding-top: 1rem; // Increase top padding
+  padding-bottom: 1rem;
 }
 
 // Ensure the text color is white
@@ -36,17 +38,16 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #7d1515; // Light gray background on hover
+      background-color: #aea4a4; // Light gray background on hover
     }
   }
 
   .pagination-link.is-current, .pagination-link.is-current:hover {
     background-color: #4a4a4a; // Active page link color (Darker grey)
     border-color: #4a4a4a;
-    color: white !important; // White text for active page link
+    color: rgb(203, 0, 0) !important; // White text for active page link
   }
 }
-
 
 // Style for the greeting text
 .dashboard-greeting {
@@ -74,7 +75,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1; // Make the sidebar grow to fill the container
-  background-color: #d55058; // Set the background color
+  background-color: #5f04ce; // Set the background color
 }
 
 // Ensure the menu items fill up the sidebar
@@ -91,6 +92,10 @@
   }
 }
 
+.menu-list .label {
+  color: white; // Set the color to white
+}
+
 // Custom CSS for centering pagination
 .pagination-wrapper {
   display: flex;
@@ -98,6 +103,57 @@
   margin-top: 1rem; // Adjust the top margin as needed
 }
 
-.pagination {
-  // Add any specific styles for the pagination here if needed
+
+// Custom CSS for the search form
+.search-form-wrapper {
+  max-width: 600px; // Example max-width, adjust as needed
+  margin: auto;
+}
+
+// If the partial contains the form directly
+.form {
+  max-width: 600px; // Example max-width, adjust as needed
+  margin: auto;
+}
+
+// Styles for the search form elements
+.field.has-addons .control {
+  margin-left: 0.5rem; // Adds a margin to the right of each control element
+}
+
+// To remove the right margin from the last control element (the search button in this case)
+.field.has-addons .control:last-child {
+  margin-right: 0; // Removes the margin on the right of the last control element
+}
+
+// Additional styling for the search button if needed
+.button.is-info {
+  margin-left: 0; // If you want a margin on the left of the search button
+}
+
+// If you want to add margin around the entire form (top, bottom, left, right)
+.is-flex.is-align-items-center {
+  margin: 1rem; // Adjust the value to suit your design
+}
+
+
+
+// Add a margin to the right of the username readout and logout button
+.hello-message, .logout-button {
+  margin-right: 2rem; // Adjust the margin as needed
+}
+
+// You may need to remove the margin on the last item if there are multiple elements
+.hello-message:last-child, .logout-button:last-child {
+  margin-right: 3;
+}
+
+// Increase height of form elements
+.field.has-addons .control .input,
+.field.has-addons .control .select select,
+.field.has-addons .control .button {
+  padding-top: 0rem; // Increase top padding
+  padding-bottom: 0rem; // Increase bottom padding
+  // Alternatively, you can set a specific height
+  // height: 3rem; // Adjust as needed
 }
