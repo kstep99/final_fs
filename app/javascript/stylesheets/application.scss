@@ -9,12 +9,33 @@
 
 // Ensure the text color is white
 .navbar-item, .navbar-link {
-  color: white !important; // The !important flag can help override other styles
+  color: rgb(222, 222, 222) !important; // The !important flag can help override other styles
 }
 
+// .navbar-menu
 
 .navbar-item:hover, .navbar-link:hover {
   background-color: #111; // Darken the item on hover
+}
+
+// .fade-grey-background {
+//   background: linear-gradient(to bottom, #0f0f0f, transparent);
+// }
+
+// Override Bulma's default hover background color for navbar items
+.navbar-menu .navbar-item:hover {
+  background-color: #5c5c5c; // Example: light grey color
+  // margin-top: 20px; //bar grows when hovered on
+}
+
+// .navbar-brand, .navbar-menu {
+//   align-items: center; // Align items vertically in the center
+// }
+
+.navbar-item {
+  // Adjust padding or margin as necessary for fine-tuning
+  padding-top: 0.0rem;
+  padding-bottom: 0.0rem;
 }
 
 // Bulma uses classes for its elements, so you don't need to style the 'ul' and 'li' directly if you use the correct Bulma classes
@@ -38,14 +59,14 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #aea4a4; // Light gray background on hover
+      background-color: #030202; // Light gray background on hover
     }
   }
 
   .pagination-link.is-current, .pagination-link.is-current:hover {
     background-color: #4a4a4a; // Active page link color (Darker grey)
     border-color: #4a4a4a;
-    color: rgb(203, 0, 0) !important; // White text for active page link
+    color: rgb(255, 242, 242) !important; // White text for active page link
   }
 }
 
@@ -88,7 +109,7 @@
 .menu-list a {
   color: #ffffff; // White text color for links
   &:hover {
-    background-color: darken(#d55058, 10%); // Slightly darker red on hover
+    background-color: darken(#d55058, 16%); // Slightly darker red on hover
   }
 }
 
