@@ -70,26 +70,17 @@
 
 // Sidebar custom styling
 .menu {
-  // Add custom styles for the sidebar here
-  border-right: 1px solid #d55058; // Example border
-  padding-right: 1rem; // Example padding
+  // Stretch the sidebar to the full height
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; // Make the sidebar grow to fill the container
+  background-color: #d55058; // Set the background color
 }
 
-// You might want to add some top margin if the sidebar doesn't start at the top of the page
-.menu-label {
-  margin-top: 1rem;
-  border-right: 1px solid #d55058;
-}
-
-// Targeting the sidebar menu
-.menu {
-  background-color: #d55058; // Your specified shade of red
-  // Add any additional styles as needed
-}
-
-// You may also want to style the text color for better visibility against the red background
+// Ensure the menu items fill up the sidebar
 .menu-label, .menu-list {
-  color: #ffffff; // White text color for better contrast
+  flex-grow: 1; // This will make them fill the available space in the sidebar
+  color: #ffffff; // Set the text color for visibility
 }
 
 // If you want to style links within the menu to ensure they are visible on the red background
@@ -98,4 +89,15 @@
   &:hover {
     background-color: darken(#d55058, 10%); // Slightly darker red on hover
   }
+}
+
+// Custom CSS for centering pagination
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem; // Adjust the top margin as needed
+}
+
+.pagination {
+  // Add any specific styles for the pagination here if needed
 }

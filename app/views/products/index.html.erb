@@ -1,29 +1,31 @@
 <!-- app/views/products/index.html.erb -->
 
-<!-- Main Content and Sidebar Layout -->
-<div class="columns">
+<div class="columns" style="min-height: 100vh;">
 
   <!-- Sidebar with Filter Form -->
-  <div class="column is-one-quarter">
-    <aside class="menu">
-      <p class="menu-label">
-        Filter Products
-      </p>
-      <div class="menu-list">
-        <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
-          <div class="field">
-            <%= form.label :category_id, "Choose a category:", class: 'label' %>
-            <div class="control">
-              <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, { class: 'select' }) %>
+  <div class="column is-one-quarter" style="background-color: #d55058; display: flex; flex-direction: column;">
+    <aside class="menu" style="flex-grow: 1; display: flex; flex-direction: column;">
+      <div style="padding: 0.75rem;">
+        <p class="menu-label" style="color: #ffffff;">
+          Filter Products
+        </p>
+        <div class="menu-list">
+          <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
+            <div class="field">
+              <%= form.label :category_id, "Choose a category:", class: 'label' %>
+              <div class="control">
+                <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, { class: 'select' }) %>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <%= form.submit "Filter", class: 'button is-link' %>
+            <div class="field">
+              <div class="control">
+                <%= form.submit "Filter", class: 'button is-link' %>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
+      <div style="flex-grow: 1;"></div> <!-- This pushes everything else to the top -->
     </aside>
   </div>
 
@@ -34,9 +36,9 @@
       <div class="columns is-vcentered is-mobile">
         <div class="column">
           <h1 class="title">Customer Dashboard</h1>
+          <p>Hello, <%= current_customer.email %></p>
         </div>
         <div class="column is-narrow has-text-right">
-          <p>Hello, <%= current_customer.email %></p>
           <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary' %>
         </div>
       </div>
@@ -73,8 +75,9 @@
       <% end %>
     </div>
 
-    <!-- Pagination Links -->
-    <%= paginate @products, theme: 'bulma' %>
-  </div>
+<!-- Pagination Links -->
+<div class="pagination-wrapper">
+  <%= paginate @products, theme: 'bulma' %>
+</div>
 
 </div>
