@@ -1,15 +1,19 @@
 <!-- app/views/products/index.html.erb -->
 
-<!-- Customer Dashboard Section -->
-<% if customer_signed_in? %>
-  <section class="section">
-    <div class="container">
+<!-- Customer Dashboard and Authentication Button Section -->
+<section class="section">
+  <div class="container">
+    <% if customer_signed_in? %>
       <h1 class="title">Customer Dashboard</h1>
       <p>Hello, <%= current_customer.email %></p>
-      <!-- Include other dashboard info here -->
-    </div>
-  </section>
-<% end %>
+      <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary' %>
+    <% else %>
+      <h1 class="title">Welcome to Our Store</h1>
+      <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
+    <% end %>
+  </div>
+</section>
+
 
 <!-- Bulma styled filter form -->
 <div class="section">
@@ -32,7 +36,7 @@
 <section class="section">
   <div class="container">
     <h2 class="title">Our Products</h2>
-    <%= link_to 'Sign In', new_customer_session_path, class: 'button is-primary' %>
+    <%# <%= link_to 'Sign In', new_customer_session_path, class: 'button is-primary' %>
 
     <div class="columns is-multiline">
       <% @products.each do |product| %>
