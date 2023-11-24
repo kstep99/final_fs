@@ -46,3 +46,56 @@
     color: white !important; // White text for active page link
   }
 }
+
+
+// Style for the greeting text
+.dashboard-greeting {
+  // Add styles for the greeting area if needed, e.g., margin-right for spacing
+  margin-right: 1em;
+}
+
+// Style for the dashboard area, arranging greeting and logout/login button
+.dashboard-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; // Changed from 'right' to 'center'
+}
+
+// Style for the logout/login button
+.dashboard-logout {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 4px;
+}
+
+// Sidebar custom styling
+.menu {
+  // Add custom styles for the sidebar here
+  border-right: 1px solid #d55058; // Example border
+  padding-right: 1rem; // Example padding
+}
+
+// You might want to add some top margin if the sidebar doesn't start at the top of the page
+.menu-label {
+  margin-top: 1rem;
+  border-right: 1px solid #d55058;
+}
+
+// Targeting the sidebar menu
+.menu {
+  background-color: #d55058; // Your specified shade of red
+  // Add any additional styles as needed
+}
+
+// You may also want to style the text color for better visibility against the red background
+.menu-label, .menu-list {
+  color: #ffffff; // White text color for better contrast
+}
+
+// If you want to style links within the menu to ensure they are visible on the red background
+.menu-list a {
+  color: #ffffff; // White text color for links
+  &:hover {
+    background-color: darken(#d55058, 10%); // Slightly darker red on hover
+  }
+}

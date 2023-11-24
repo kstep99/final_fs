@@ -1,59 +1,72 @@
 <!-- app/views/products/index.html.erb -->
 
-<!-- Customer Dashboard and Authentication Button Section -->
-<section class="section">
-  <div class="container">
-    <% if customer_signed_in? %>
-      <h1 class="title">Customer Dashboard</h1>
-      <p>Hello, <%= current_customer.email %></p>
-      <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary' %>
-    <% else %>
-      <h1 class="title">Welcome to Our Store</h1>
-      <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
-    <% end %>
+<!-- Main Content and Sidebar Layout -->
+<div class="columns">
+
+  <!-- Sidebar with Filter Form -->
+  <div class="column is-one-quarter">
+    <aside class="menu">
+      <p class="menu-label">
+        Filter Products
+      </p>
+      <div class="menu-list">
+        <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
+          <div class="field">
+            <%= form.label :category_id, "Choose a category:", class: 'label' %>
+            <div class="control">
+              <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, { class: 'select' }) %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <%= form.submit "Filter", class: 'button is-link' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </aside>
   </div>
-</section>
 
-
-<!-- Bulma styled filter form -->
-<div class="section">
-  <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
-    <div class="field">
-      <%= form.label :category_id, "Choose a category:", class: 'label' %>
-      <div class="control">
-        <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, { class: 'select' }) %>
+  <!-- Main Content Column -->
+  <div class="column is-three-quarters">
+    <!-- Customer Dashboard and Authentication Button Section -->
+    <% if customer_signed_in? %>
+      <div class="columns is-vcentered is-mobile">
+        <div class="column">
+          <h1 class="title">Customer Dashboard</h1>
+        </div>
+        <div class="column is-narrow has-text-right">
+          <p>Hello, <%= current_customer.email %></p>
+          <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary' %>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <%= form.submit "Filter", class: 'button is-link' %>
+    <% else %>
+      <div class="columns is-vcentered is-mobile">
+        <div class="column">
+          <h1 class="title">Welcome to Our Store</h1>
+        </div>
+        <div class="column is-narrow has-text-right">
+          <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
 
-<!-- Products Listing Section -->
-<section class="section">
-  <div class="container">
+    <!-- Products Listing Section -->
     <h2 class="title">Our Products</h2>
-    <%# <%= link_to 'Sign In', new_customer_session_path, class: 'button is-primary' %>
-
     <div class="columns is-multiline">
       <% @products.each do |product| %>
         <div class="column is-one-quarter">
           <div class="card">
             <div class="card-content">
               <%= link_to product.name, product_path(product), class: 'product-name title is-5' %>
-
               <% if product.images.attached? %>
                 <% product.images.each do |image| %>
                   <figure class="image is-4by3">
-                    <%= image_tag(image, class: "is-rounded") %> <!-- Adjusted for Bulma -->
+                    <%= image_tag(image, class: "is-rounded") %>
                   </figure>
                 <% end %>
               <% end %>
               <p class="subtitle is-6"><%= number_to_currency(product.price) %></p>
-              <!-- Any other product details you want to display -->
             </div>
           </div>
         </div>
@@ -63,4 +76,5 @@
     <!-- Pagination Links -->
     <%= paginate @products, theme: 'bulma' %>
   </div>
-</section>
+
+</div>
