@@ -4,6 +4,9 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :validatable, :timeoutable, :rememberable
 
+  # Associations
+  belongs_to :province, optional: true
+
   has_many :orders
 
   # Active Storage association for the image

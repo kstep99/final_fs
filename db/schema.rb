@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_25_013048) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_25_064112) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -84,6 +84,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_013048) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: nil
     t.datetime "remember_created_at", precision: nil
+    t.string "address"
+    t.string "city"
+    t.string "postal_code"
+    t.integer "province_id"
+    t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
@@ -140,6 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_013048) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers", "provinces"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
