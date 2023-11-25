@@ -1,18 +1,23 @@
 ActiveAdmin.register Province do
-  permit_params :name, :tax_rate
+  # Update permit_params to include the new columns and remove tax_rate
+  permit_params :name, :gst, :pst, :hst
 
   index do
     selectable_column
     id_column
     column :name
-    column :tax_rate
+    column :gst
+    column :pst
+    column :hst
     actions
   end
 
   form do |f|
     f.inputs do
       f.input :name
-      f.input :tax_rate
+      f.input :gst
+      f.input :pst
+      f.input :hst
     end
     f.actions
   end
@@ -20,7 +25,9 @@ ActiveAdmin.register Province do
   show do
     attributes_table do
       row :name
-      row :tax_rate
+      row :gst
+      row :pst
+      row :hst
     end
   end
 end

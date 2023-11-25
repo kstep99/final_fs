@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_25_064112) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_25_100636) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -129,9 +129,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_064112) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "name", null: false
-    t.decimal "tax_rate", precision: 5, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "hst", precision: 5, scale: 4
+    t.decimal "gst", precision: 5, scale: 4
+    t.decimal "pst", precision: 5, scale: 4
     t.index ["name"], name: "index_provinces_on_name", unique: true
   end
 
