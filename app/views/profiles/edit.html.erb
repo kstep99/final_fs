@@ -1,0 +1,51 @@
+<!-- app/views/profiles/edit.html.erb -->
+<%= form_for @customer, url: profile_path, html: { multipart: true } do |f| %>
+
+  <h1>Edit Profile</h1>
+
+  <% if @customer.image.attached? %>
+    <%= image_tag @customer.image.variant(resize_to_limit: [100, 100]).processed %>
+  <% else %>
+    <%= image_tag 'default-profile.jpg' %> <!-- Path to your default image -->
+  <% end %>
+
+  <div class="field">
+    <%= f.label :image, "Profile Image" %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :full_name, "Full Name" %>
+    <%= f.text_field :full_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "Email" %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "Address" %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city, "City" %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postal_code, "Postal Code" %>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :province_id, "Province" %>
+    <%= f.collection_select :province_id, Province.all, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Update Profile' %>
+  </div>
+
+<% end %>

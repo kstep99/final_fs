@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
+  get 'profiles/edit'
+  get 'profiles/update'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :customers
+
+  # Profile routes
+  resource :profile, only: [:show, :edit, :update]
 
   # Define a route for the dashboard controller's index action
   get 'dashboard/index', as: :dashboard_index

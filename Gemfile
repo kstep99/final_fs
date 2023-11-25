@@ -52,6 +52,8 @@ gem 'bulma-rails', '~> 0.9.1'
 
 gem 'webpacker'
 
+gem 'ruby-vips'
+
 
 # project gems added at start of project
 gem 'activeadmin'
