@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
   # Permit all attributes for assignment, including multiple images
-  permit_params :name, :description, :price, :category_id, images: [], images_attributes: [:id, :_destroy]
+  permit_params :name, :description, :price, :quantity_available, :category_id, images: [], images_attributes: [:id, :_destroy]
 
   # Define the index page table columns
   index do
@@ -9,6 +9,7 @@ ActiveAdmin.register Product do
     column :name
     column :description
     column :price
+    column :quantity_available
     column :category
 
     # Add a column for images
@@ -40,6 +41,7 @@ ActiveAdmin.register Product do
       f.input :name
       f.input :description
       f.input :price
+      f.input :quantity_available
       f.input :category, as: :select, collection: Category.all.collect { |c| [c.name, c.id] }
     end
 
@@ -69,9 +71,6 @@ ActiveAdmin.register Product do
     f.actions
   end
 
-
-
-
   # Define the show page
   show do |product|
     attributes_table do
@@ -79,7 +78,7 @@ ActiveAdmin.register Product do
       row :description
       row :price
       row :category
-
+      row :quantity_available
       row :images do |prod|
         ul do
           prod.images.each do |img|

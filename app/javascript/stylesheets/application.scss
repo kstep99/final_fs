@@ -18,9 +18,9 @@
   background-color: #111; // Darken the item on hover
 }
 
-// .fade-grey-background {
-//   background: linear-gradient(to bottom, #0f0f0f, transparent);
-// }
+.fade-grey-background {
+  background: linear-gradient(to bottom, #000000, transparent);
+}
 
 // Override Bulma's default hover background color for navbar items
 .navbar-menu .navbar-item:hover {
@@ -28,8 +28,8 @@
   // margin-top: 20px; //bar grows when hovered on
 }
 
-// .navbar-brand, .navbar-menu {
-//   align-items: center; // Align items vertically in the center
+// .navbar-brand, .navbar-item {
+// align-items: center; // Align items vertically in the center
 // }
 
 .navbar-item {
@@ -59,7 +59,8 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #030202; // Light gray background on hover
+      background-color: #9a9aee; // Light purple gray background on hover
+      color: rgb(255, 242, 242) !important;
     }
   }
 
@@ -96,7 +97,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1; // Make the sidebar grow to fill the container
-  background-color: #5f04ce; // Set the background color
+  background-color: #6a19ac; // Set the background color
 }
 
 // Ensure the menu items fill up the sidebar

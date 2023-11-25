@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  # Add validations as necessary, for example:
+  validates :quantity_available, numericality: { greater_than_or_equal_to: 0 }
+
   belongs_to :category
   has_many_attached :images
 
