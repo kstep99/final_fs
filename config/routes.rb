@@ -22,10 +22,11 @@ Rails.application.routes.draw do
   delete '/cart/remove/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
   patch '/cart/update/:product_id', to: 'carts#update_cart_item', as: 'update_cart_item'
 
-  # Checkout route
+  # Checkout routes
   get '/checkout', to: 'orders#new', as: 'checkout'
   # get '/checkout', to: 'checkout#new', as: 'new_checkout'
   # post '/checkout', to: 'checkout#create', as: 'create_checkout'
+  get '/initiate_checkout', to: 'carts#initiate_checkout', as: 'initiate_checkout'
 
   # Define routes for Orders
   resources :orders, only: [:new, :create]

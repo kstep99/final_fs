@@ -20,6 +20,8 @@
     <% end %>
   </table>
   <p>Total Price: <%= number_to_currency(@total_price) %></p>
+
   <!-- Temporarily comment out the Checkout link -->
-  <%= link_to 'Checkout', checkout_path %>
+  <%# <%= link_to 'Checkout', checkout_path %>
+<%= link_to 'Checkout', initiate_checkout_path, class: 'button is-primary' %>
 <% end %>
