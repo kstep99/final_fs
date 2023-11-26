@@ -1,181 +1,194 @@
 @import '~bulma/bulma';
 
-// Increase specificity by repeating the class
+// General navbar styles
 .navbar.navbar {
-  background-color: #000000; // Set the background color to grey
-  padding-top: 1rem; // Increase top padding
+  background-color: #000000; // Dark background color
+  padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-// Ensure the text color is white
-.navbar-item, .navbar-link {
-  color: rgb(222, 222, 222) !important; // The !important flag can help override other styles
+.navbar-menu {
+  .navbar-start {
+    // Ensure the navbar items are white
+    .navbar-item {
+      color: #fff; // White text color
+
+      // Change the background and text color on hover
+      &:hover {
+        color: #fff; // Keep the text color white
+        background-color: #4a4a4a; // Dark grey background
+      }
+    }
+  }
 }
 
-// .navbar-menu
-
-.navbar-item:hover, .navbar-link:hover {
-  background-color: #111; // Darken the item on hover
-}
-
-.fade-grey-background {
-  background: linear-gradient(to bottom, #000000, transparent);
-}
-
-// Override Bulma's default hover background color for navbar items
-.navbar-menu .navbar-item:hover {
-  background-color: #5c5c5c; // Example: light grey color
-  // margin-top: 20px; //bar grows when hovered on
-}
-
-// .navbar-brand, .navbar-item {
-// align-items: center; // Align items vertically in the center
-// }
-
-.navbar-item {
-  // Adjust padding or margin as necessary for fine-tuning
-  padding-top: 0.0rem;
-  padding-bottom: 0.0rem;
-}
-
-// Bulma uses classes for its elements, so you don't need to style the 'ul' and 'li' directly if you use the correct Bulma classes
-// However, if you need to apply specific styles, add a class to the 'ul' or 'li' in your HTML and reference it here
-
-.user-info {
-  color: rgb(191, 172, 255);
-  // The '.user-info' class should be added to the container that holds the user information elements
-}
-
-// Since you're using Bulma, you don't need to import Bootstrap just for the modal; Bulma has its own modal component
-// If you still want to use Bootstrap's modal, then keep the import
-// @import "bootstrap";
-
-// Custom styling for pagination
+// Pagination styles
 .pagination {
   .pagination-link, .pagination-ellipsis {
-    padding: 8px 12px; // Adjust for more padding
+    padding: 8px 12px;
     margin-right: 4px;
-    border-radius: 4px; // Rounded corners
+    border-radius: 4px;
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #9a9aee; // Light purple gray background on hover
-      color: rgb(255, 242, 242) !important;
+      background-color: #9a9aee; // Light purple on hover
+      color: #fff !important;
     }
   }
 
   .pagination-link.is-current, .pagination-link.is-current:hover {
-    background-color: #4a4a4a; // Active page link color (Darker grey)
+    background-color: #4a4a4a; // Dark grey for current page
     border-color: #4a4a4a;
-    color: rgb(255, 242, 242) !important; // White text for active page link
+    color: #fff !important;
   }
 }
 
-// Style for the greeting text
-.dashboard-greeting {
-  // Add styles for the greeting area if needed, e.g., margin-right for spacing
-  margin-right: 1em;
-}
-
-// Style for the dashboard area, arranging greeting and logout/login button
-.dashboard-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; // Changed from 'right' to 'center'
-}
-
-// Style for the logout/login button
-.dashboard-logout {
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 4px;
-}
-
-// Sidebar custom styling
+// Custom sidebar styles
 .menu {
-  // Stretch the sidebar to the full height
   display: flex;
   flex-direction: column;
-  flex-grow: 1; // Make the sidebar grow to fill the container
-  background-color: #6a19ac; // Set the background color
-}
+  flex-grow: 1;
+  background-color: #6a19ac; // Purple background for sidebar
 
-// Ensure the menu items fill up the sidebar
-.menu-label, .menu-list {
-  flex-grow: 1; // This will make them fill the available space in the sidebar
-  color: #ffffff; // Set the text color for visibility
-}
+  .menu-label, .menu-list {
+    flex-grow: 1;
+    color: #fff; // White text for menu items
+  }
 
-// If you want to style links within the menu to ensure they are visible on the red background
-.menu-list a {
-  color: #ffffff; // White text color for links
-  &:hover {
-    background-color: darken(#d55058, 16%); // Slightly darker red on hover
+  // you may want to scope these styles to that context for better control
+.menu-list {
+  .form {
+    // Style for the form itself if needed
+
+    .label {
+      color: #fff; // This sets the label text to white
+    }
+
+    .select {
+      // The color property won't affect the dropdown arrow in <select>,
+      // but it will affect the text color of the selected option in some browsers
+      color: #fff;
+
+      // To style the <select> dropdown, you may need to use browser-specific pseudo-elements
+      // Here is an example for Webkit browsers (Chrome, Safari)
+      -webkit-appearance: none; // Removes default styling
+      background-color: #333; // Dark background for the dropdown
+      border: 1px solid #fff; // White border for the dropdown
+      border-radius: 4px; // Rounded corners for the dropdown
+
+      &:focus {
+        outline: none; // Removes the default focus outline
+        border-color: #aaa; // Example: Lighter border color on focus
+      }
+    }
+
+    // If you are using a submit button within the form, you can style it as well
+    input[type="submit"] {
+      background-color: #444; // Dark background for the button
+      color: #fff; // White text for the button
+      border: none; // No border for the button
+      border-radius: 4px; // Rounded corners for the button
+
+      &:hover {
+        background-color: #555; // Slightly lighter background on hover
+      }
+    }
   }
 }
 
-.menu-list .label {
-  color: white; // Set the color to white
+.button.is-link {
+  background-color: #4CAF50; // Your desired background color
+  color: white; // Text color
+  width: 200px; // Set a specific width
+
+  &:hover {
+    background-color: darken(#4CAF50, 10%);
+  }
 }
 
-// Custom CSS for centering pagination
+  // Styles for the dropdown and buttons in the form
+  .form {
+    .field {
+      margin-bottom: 1rem; // Space between fields
+
+      .label {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .control {
+        select {
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+
+        // Filter button style
+        .button.is-link {
+          margin-right: 1.5rem; // Space between filter and cart buttons
+        }
+
+        // Cart button style
+        .button.is-primary {
+          padding: 0.5em 1em;
+          font-size: 0.75rem;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}
+
+.form .field .control .button.is-link {
+  background-color: #6e7884; // Your desired background color
+  color: white; // Text color
+  padding-left: 2em; // Increase left padding
+  padding-right: 2em; // Increase right padding
+
+  &:hover {
+    background-color: darken(#4c7caf, 10%);
+  }
+}
+
+// Styles for centering pagination and adjusting form sizes
 .pagination-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 1rem; // Adjust the top margin as needed
+  margin-top: 1rem;
 }
 
-
-// Custom CSS for the search form
 .search-form-wrapper {
-  max-width: 600px; // Example max-width, adjust as needed
+  max-width: 600px;
   margin: auto;
 }
 
-// If the partial contains the form directly
-.form {
-  max-width: 600px; // Example max-width, adjust as needed
-  margin: auto;
-}
-
-// Styles for the search form elements
 .field.has-addons .control {
-  margin-left: 0.5rem; // Adds a margin to the right of each control element
+  margin-left: 0.5rem;
 }
 
-// To remove the right margin from the last control element (the search button in this case)
 .field.has-addons .control:last-child {
-  margin-right: 0; // Removes the margin on the right of the last control element
+  margin-right: 0;
 }
 
-// Additional styling for the search button if needed
 .button.is-info {
-  margin-left: 0; // If you want a margin on the left of the search button
+  margin-left: 0;
 }
 
-// If you want to add margin around the entire form (top, bottom, left, right)
 .is-flex.is-align-items-center {
-  margin: 1rem; // Adjust the value to suit your design
+  margin: 1rem;
 }
 
-
-
-// Add a margin to the right of the username readout and logout button
 .hello-message, .logout-button {
-  margin-right: 2rem; // Adjust the margin as needed
+  margin-right: 2rem;
 }
 
-// You may need to remove the margin on the last item if there are multiple elements
 .hello-message:last-child, .logout-button:last-child {
-  margin-right: 3;
+  margin-right: 0;
 }
 
-// Increase height of form elements
 .field.has-addons .control .input,
 .field.has-addons .control .select select,
 .field.has-addons .control .button {
-  padding-top: 0rem; // Increase top padding
-  padding-bottom: 0rem; // Increase bottom padding
-  // Alternatively, you can set a specific height
-  // height: 3rem; // Adjust as needed
+  padding-top: 0;
+  padding-bottom: 0;
 }

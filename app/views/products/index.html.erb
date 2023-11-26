@@ -10,13 +10,13 @@
           Filter Products
         </p>
         <div class="menu-list">
-          <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
-            <div class="field">
-              <%= form.label :category_id, "Choose a category:", class: 'label' %>
-              <div class="control">
-                <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, { class: 'select' }) %>
-              </div>
-            </div>
+      <%= form_with(url: products_path, method: :get, local: true, class: 'form') do |form| %>
+      <div class="field">
+      <%= form.label :category_id, "Choose a category:", class: 'label' %>
+      <div class="control">
+        <%= form.collection_select(:category_id, Category.all, :id, :name, { prompt: 'All Products' }, { class: 'select' }) %>
+      </div>
+        </div>
             <div class="field">
               <div class="control">
                 <%= form.submit "Filter", class: 'button is-link' %>
