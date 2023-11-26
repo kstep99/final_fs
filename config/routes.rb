@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # Devise routes for Admin and Customers
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :customers
-  get '/checkout', to: 'checkout#new', as: 'checkout'
 
   # Active Admin routes
   ActiveAdmin.routes(self)
@@ -20,8 +19,10 @@ Rails.application.routes.draw do
   # Cart routes
   get '/cart', to: 'carts#show', as: 'cart'
   delete '/cart/remove/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
-  # Update the route for cart item quantity update
   patch '/cart/update/:product_id', to: 'carts#update_cart_item', as: 'update_cart_item'
+
+  # Checkout route
+  get '/checkout', to: 'orders#new', as: 'checkout'
 
   # Resourceful routes for customers with additional collection route
   resources :customers do
