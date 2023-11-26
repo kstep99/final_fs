@@ -1,27 +1,34 @@
 Rails.application.routes.draw do
-  get 'profiles/show'
-  get 'profiles/edit'
-  get 'profiles/update'
+  # Devise routes for Admin and Customers
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   devise_for :customers
+  get '/checkout', to: 'checkout#new', as: 'checkout'
 
-  # Profile routes
-  resource :profile, only: [:show, :edit, :update]
+  # Active Admin routes
+  ActiveAdmin.routes(self)
 
-  # Define a route for the dashboard controller's index action
-  get 'dashboard/index', as: :dashboard_index
-
-  # This sets the root to the products index page
-  root 'products#index'
-
-  # Routes for products
-  resources :products, only: [:index, :show] # Add other actions as needed
-
-  # Resourceful routes for customers
-  resources :customers do
-    collection do
-      get 'alphabetized' # This adds the /customers/alphabetized path
+  # Product routes
+  resources :products, only: [:index, :show] do
+    member do
+      post 'add_to_cart', to: 'products#add_to_cart'
     end
   end
+
+  # Profile routes for a singular resource
+  resource :profile, only: [:show, :edit, :update]
+
+  # Cart routes
+  get '/cart', to: 'carts#show', as: 'cart'
+  delete '/cart/remove/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
+  patch '/cart/update/:product_id', to: 'carts#update_cart_item', as: 'update_cart_item'
+
+  # Resourceful routes for customers with additional collection route
+  resources :customers do
+    collection do
+      get 'alphabetized'
+    end
+  end
+
+  # Set the root to the products index page
+  root 'products#index'
 end

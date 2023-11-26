@@ -48,12 +48,14 @@ gem 'sassc-rails'
 # Gem for pagination
 gem 'kaminari'
 
+# styling
 gem 'bulma-rails', '~> 0.9.1'
 
+# precompile
 gem 'webpacker'
 
+# image support
 gem 'ruby-vips'
-
 
 # project gems added at start of project
 gem 'activeadmin'

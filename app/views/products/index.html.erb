@@ -25,47 +25,47 @@
           <% end %>
         </div>
       </div>
-      <div style="flex-grow: 1;"></div> <!-- This pushes everything else to the top -->
+      <div style="flex-grow: 1;"></div>
     </aside>
   </div>
 
-<!-- Main Content Column -->
-<div class="column is-three-fourths">
+  <!-- Main Content Column -->
+  <div class="column is-three-fourths">
 
-<!-- Customer Dashboard and Authentication Button Section -->
-<% if customer_signed_in? %>
-  <div class="columns is-vcentered is-mobile" style="background-color: #282828; color: white;">
-    <!-- Title -->
-    <div class="column is-one-third">
-       <h1 class="title" style="color: #cecece;">Customer Dashboard</h1>
-    </div>
-    <!-- Search Form -->
-    <div class="column is-one-third has-text-centered">
-      <%= render 'partials/search' %>
-    </div>
-    <!-- Greeting and Logout -->
-<div class="column is-one-third has-text-right">
+    <!-- Customer Dashboard and Authentication Button Section -->
+    <% if customer_signed_in? %>
+      <div class="columns is-vcentered is-mobile" style="background-color: #282828; color: white;">
+        <!-- Title -->
+        <div class="column is-one-third">
+          <h1 class="title" style="color: #cecece;">Customer Dashboard</h1>
+        </div>
+        <!-- Search Form -->
+        <div class="column is-one-third has-text-centered">
+          <%= render 'partials/search' %>
+        </div>
+        <!-- Greeting and Logout and profile and cart -->
+        <div class="column is-one-third has-text-right">
+          <%= link_to 'Profile', profile_path, class: 'button is-primary' %>
+           <%= link_to 'Cart', cart_path, class: 'button is-primary' %>
+          <p class="hello-message">Hello, <%= current_customer.email %></p>
+          <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary logout-button' %>
+        </div>
+      </div>
+    <% else %>
+      <div class="columns is-vcentered is-mobile">
+        <!-- Title -->
+        <div class="column is-one-third">
+          <h1 class="title">Welcome to Our Store</h1>
+        </div>
+        <!-- Search Form Placeholder (empty column to balance the layout) -->
+        <div class="column is-one-third"></div>
+        <!-- Login -->
+        <div class="column is-one-third has-text-right">
+          <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
+        </div>
+      </div>
+    <% end %>
 
-  <%= link_to 'Profile', profile_path %>
-
-  <p class="hello-message">Hello, <%= current_customer.email %></p>
-  <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary logout-button' %>
-</div>
-  </div>
-<% else %>
-  <div class="columns is-vcentered is-mobile">
-    <!-- Title -->
-    <div class="column is-one-third">
-      <h1 class="title">Welcome to Our Store</h1>
-    </div>
-    <!-- Search Form Placeholder (empty column to balance the layout) -->
-    <div class="column is-one-third"></div>
-    <!-- Login -->
-    <div class="column is-one-third has-text-right">
-      <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
-    </div>
-  </div>
-<% end %>
 
     <!-- Products Listing Section -->
     <h2 class="title">Our Products</h2>
@@ -83,6 +83,18 @@
                 <% end %>
               <% end %>
               <p class="subtitle is-6"><%= number_to_currency(product.price) %></p>
+              <!-- Add to Cart Form -->
+              <%= form_with(url: add_to_cart_product_path(product), method: :post, local: true) do |f| %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <div class="field has-addons">
+                  <div class="control">
+                    <%= number_field_tag :quantity, 1, min: 1, class: 'input', style: 'width: 60px;' %>
+                  </div>
+                  <div class="control">
+                    <%= submit_tag 'Add to Cart', class: 'button is-small is-primary' %>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

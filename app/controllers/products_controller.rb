@@ -1,7 +1,9 @@
 # app/controllers/products_controller.rb
 class ProductsController < ApplicationController
-
+  include CartManagement
   before_action :set_user_dashboard, only: [:index]
+
+
 
   def index
     # Start with all products or a specific category if provided
