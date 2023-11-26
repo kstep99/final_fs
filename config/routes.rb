@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'checkout/new'
   # Devise routes for Admin and Customers
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :customers
@@ -23,6 +24,11 @@ Rails.application.routes.draw do
 
   # Checkout route
   get '/checkout', to: 'orders#new', as: 'checkout'
+  # get '/checkout', to: 'checkout#new', as: 'new_checkout'
+  # post '/checkout', to: 'checkout#create', as: 'create_checkout'
+
+  # Define routes for Orders
+  resources :orders, only: [:new, :create]
 
   # Resourceful routes for customers with additional collection route
   resources :customers do

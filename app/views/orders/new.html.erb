@@ -1,0 +1,45 @@
+<!-- app/views/orders/new.html.erb -->
+
+<h1>Checkout</h1>
+
+<% if session[:cart].blank? %>
+  <p>Your cart is empty.</p>
+<% else %>
+  <!-- Display Cart Items -->
+  <h2>Your Cart Items</h2>
+  <table>
+    <% total_price = 0 %>
+    <% session[:cart].each do |item| %>
+      <% product = Product.find(item["product_id"]) %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
+      </tr>
+      <% total_price += product.price * item["quantity"] %>
+    <% end %>
+    <tr>
+      <td><strong>Total Price:</strong></td>
+      <td><%= number_to_currency(total_price) %></td>
+    </tr>
+  </table>
+
+  <!-- Checkout Form -->
+  <%= form_with(url: orders_path, method: :post) do |form| %>
+    <!-- Shipping Information -->
+    <h3>Shipping Information</h3>
+    <%= form.text_field :name, placeholder: "Full Name" %>
+    <%= form.text_field :address, placeholder: "Address" %>
+    <%= form.text_field :city, placeholder: "City" %>
+    <%= form.text_field :province, placeholder: "Province" %>
+    <%= form.text_field :postal_code, placeholder: "Postal Code" %>
+
+    <!-- Payment Information (Placeholder) -->
+    <h3>Payment Information</h3>
+    <%= form.text_field :card_number, placeholder: "Credit Card Number" %>
+    <%= form.text_field :card_expiry, placeholder: "MM/YY" %>
+    <%= form.text_field :card_cvv, placeholder: "CVV" %>
+
+    <!-- Submit Button -->
+    <%= form.submit "Complete Order", class: "button is-primary" %>
+  <% end %>
+<% end %>
