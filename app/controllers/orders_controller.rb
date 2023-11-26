@@ -1,7 +1,24 @@
+# app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
+  before_action :set_tax_rates, only: [:new, :create]
+
   def new
-    # Logic for new order (initial checkout page)
+    @order = Order.new
   end
 
-  # Add other actions as needed, such as create, show, etc.
+  # ... other actions ...
+
+  private
+
+  def set_tax_rates
+    if customer_signed_in? && current_customer.province_id
+      province = Province.find(current_customer.province_id)
+      @gst = province.gst
+      @pst = province.pst
+      @hst = province.hst
+    else
+      # Default tax rates or nil if taxes are not applicable
+      @gst = @pst = @hst = nil
+    end
+  end
 end

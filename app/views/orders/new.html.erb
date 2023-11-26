@@ -1,5 +1,4 @@
 <!-- app/views/orders/new.html.erb -->
-
 <h1>Checkout</h1>
 
 <% if session[:cart].blank? %>
@@ -14,8 +13,8 @@
       <tr>
         <td><%= product.name %></td>
         <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
+        <% total_price += product.price * item["quantity"] %>
       </tr>
-      <% total_price += product.price * item["quantity"] %>
     <% end %>
     <tr>
       <td><strong>Total Price:</strong></td>
@@ -30,7 +29,7 @@
     <%= form.text_field :name, placeholder: "Full Name" %>
     <%= form.text_field :address, placeholder: "Address" %>
     <%= form.text_field :city, placeholder: "City" %>
-    <%= form.text_field :province, placeholder: "Province" %>
+    <%= form.collection_select :province_id, Province.all, :id, :name, include_blank: true, id: "province_selector" %>
     <%= form.text_field :postal_code, placeholder: "Postal Code" %>
 
     <!-- Payment Information (Placeholder) -->
@@ -38,6 +37,14 @@
     <%= form.text_field :card_number, placeholder: "Credit Card Number" %>
     <%= form.text_field :card_expiry, placeholder: "MM/YY" %>
     <%= form.text_field :card_cvv, placeholder: "CVV" %>
+
+    <!-- Display tax by province -->
+    <div id="taxes">
+      <p>GST: <%= number_to_currency(@gst) %></p>
+      <p>PST: <%= number_to_currency(@pst) %></p>
+      <p>HST: <%= number_to_currency(@hst) %></p>
+      <p>Total Cost: <%= number_to_currency(@total_price) %></p>
+    </div>
 
     <!-- Submit Button -->
     <%= form.submit "Complete Order", class: "button is-primary" %>

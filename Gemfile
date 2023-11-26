@@ -57,6 +57,8 @@ gem 'webpacker'
 # image support
 gem 'ruby-vips'
 
+gem 'jquery-rails'
+
 # project gems added at start of project
 gem 'activeadmin'
 gem 'devise'
