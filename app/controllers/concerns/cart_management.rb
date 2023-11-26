@@ -42,9 +42,9 @@ module CartManagement
     product_id = params[:product_id]
     quantity = params[:quantity].to_i
 
-    # Check if the quantity is valid
-    unless quantity > 0
-      redirect_to cart_path, alert: 'Invalid quantity.'
+    product = Product.find_by(id: product_id)
+    if product.nil? || quantity < 0 || quantity > product.quantity_available
+      redirect_to cart_path, alert: 'Invalid product or quantity.'
       return
     end
 
@@ -55,6 +55,7 @@ module CartManagement
 
     redirect_to cart_path, notice: 'Cart updated.'
   end
+
 
   # Calculates the total price of items in the cart
   private
