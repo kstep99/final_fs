@@ -2,6 +2,9 @@
 
 <h1>Checkout</h1>
 
+<%= javascript_pack_tag 'checkout' %>
+
+
 <% if session[:cart].blank? %>
   <p>Your cart is empty.</p>
 <% else %>
@@ -32,6 +35,11 @@
     <%= form.text_field :city, placeholder: "City", value: @customer&.city %>
     <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { placeholder: "Province" } %>
     <%= form.text_field :postal_code, placeholder: "Postal Code", value: @customer&.postal_code %>
+
+<div>
+  <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
+  <p>Total Price: <span id="total_price">$0.00</span></p>
+</div>
 
     <!-- Payment Information (Placeholder) -->
     <h3>Payment Information</h3>

@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   # Custom route for initiating checkout
   get '/initiate_checkout', to: 'carts#initiate_checkout', as: 'initiate_checkout'
 
+  # Route for calculating taxes
+  get '/calculate_taxes/:province_id', to: 'orders#calculate_taxes', as: 'calculate_taxes'
+
   # Resourceful routes for customers with an additional collection route
   resources :customers do
     collection do
