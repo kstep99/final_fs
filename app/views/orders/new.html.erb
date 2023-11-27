@@ -27,11 +27,11 @@
   <%= form_with(url: orders_path, method: :post) do |form| %>
     <!-- Shipping Information -->
     <h3>Shipping Information</h3>
-    <%= form.text_field :name, placeholder: "Full Name" %>
-    <%= form.text_field :address, placeholder: "Address" %>
-    <%= form.text_field :city, placeholder: "City" %>
-    <%= form.text_field :province, placeholder: "Province" %>
-    <%= form.text_field :postal_code, placeholder: "Postal Code" %>
+    <%= form.text_field :name, placeholder: "Full Name", value: @customer&.full_name %>
+    <%= form.text_field :address, placeholder: "Address", value: @customer&.address %>
+    <%= form.text_field :city, placeholder: "City", value: @customer&.city %>
+    <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { placeholder: "Province" } %>
+    <%= form.text_field :postal_code, placeholder: "Postal Code", value: @customer&.postal_code %>
 
     <!-- Payment Information (Placeholder) -->
     <h3>Payment Information</h3>
