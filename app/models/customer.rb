@@ -9,8 +9,6 @@ class Customer < ApplicationRecord
 
   has_many :orders
 
-
-
   # Active Storage association for the image
   has_one_attached :image
 
