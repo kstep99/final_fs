@@ -8,8 +8,6 @@ class Customer < ApplicationRecord
   belongs_to :province, optional: true
 
   has_many :orders
-  has_one :address
-
 
   # Active Storage association for the image
   has_one_attached :image

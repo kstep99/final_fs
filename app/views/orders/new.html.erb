@@ -1,5 +1,9 @@
 <!-- app/views/orders/new.html.erb -->
+
 <h1>Checkout</h1>
+
+<%= javascript_pack_tag 'checkout' %>
+
 
 <% if session[:cart].blank? %>
   <p>Your cart is empty.</p>
@@ -13,8 +17,8 @@
       <tr>
         <td><%= product.name %></td>
         <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
-        <% total_price += product.price * item["quantity"] %>
       </tr>
+      <% total_price += product.price * item["quantity"] %>
     <% end %>
     <tr>
       <td><strong>Total Price:</strong></td>
@@ -26,25 +30,27 @@
   <%= form_with(url: orders_path, method: :post) do |form| %>
     <!-- Shipping Information -->
     <h3>Shipping Information</h3>
-    <%= form.text_field :name, placeholder: "Full Name" %>
-    <%= form.text_field :address, placeholder: "Address" %>
-    <%= form.text_field :city, placeholder: "City" %>
-    <%= form.collection_select :province_id, Province.all, :id, :name, include_blank: true, id: "province_selector" %>
-    <%= form.text_field :postal_code, placeholder: "Postal Code" %>
+    <%= form.text_field :name, placeholder: "Full Name", value: @customer&.full_name %>
+    <%= form.text_field :address, placeholder: "Address", value: @customer&.address %>
+    <%= form.text_field :city, placeholder: "City", value: @customer&.city %>
+
+    <%# <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { placeholder: "Province" } %>
+
+    <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
+
+
+    <%= form.text_field :postal_code, placeholder: "Postal Code", value: @customer&.postal_code %>
+
+<div>
+  <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
+  <p>Total Price: <span id="total_price">$0.00</span></p>
+</div>
 
     <!-- Payment Information (Placeholder) -->
     <h3>Payment Information</h3>
     <%= form.text_field :card_number, placeholder: "Credit Card Number" %>
     <%= form.text_field :card_expiry, placeholder: "MM/YY" %>
     <%= form.text_field :card_cvv, placeholder: "CVV" %>
-
-    <!-- Display tax by province -->
-    <div id="taxes">
-      <p>GST: <%= number_to_currency(@gst) %></p>
-      <p>PST: <%= number_to_currency(@pst) %></p>
-      <p>HST: <%= number_to_currency(@hst) %></p>
-      <p>Total Cost: <%= number_to_currency(@total_price) %></p>
-    </div>
 
     <!-- Submit Button -->
     <%= form.submit "Complete Order", class: "button is-primary" %>

@@ -21,6 +21,10 @@ gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
+# Turbolinks gem
+gem 'turbolinks', '~> 5'
+
+
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
@@ -58,6 +62,7 @@ gem 'webpacker'
 gem 'ruby-vips'
 
 gem 'jquery-rails'
+
 
 # project gems added at start of project
 gem 'activeadmin'

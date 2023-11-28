@@ -1,24 +1,41 @@
-# app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
-  before_action :set_tax_rates, only: [:new, :create]
+  before_action :authenticate_customer!, only: [:new, :create]
 
   def new
-    @order = Order.new
+    if customer_signed_in?
+      @customer = current_customer
+      # Create a new order object if needed
+      @order = Order.new
+    else
+      redirect_to new_customer_session_path, alert: 'Please sign in to continue.'
+    end
   end
 
-  # ... other actions ...
+  # Add other actions as needed, such as create, show, etc.
+
+  def calculate_taxes
+    province_id = params[:province_id]
+    province = Province.find(province_id)
+
+    tax_amount, total_price = calculate_order_taxes(province)
+
+    render json: { tax_amount: tax_amount, total_price: total_price }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Province not found" }, status: :not_found
+  end
 
   private
 
-  def set_tax_rates
-    if customer_signed_in? && current_customer.province_id
-      province = Province.find(current_customer.province_id)
-      @gst = province.gst
-      @pst = province.pst
-      @hst = province.hst
-    else
-      # Default tax rates or nil if taxes are not applicable
-      @gst = @pst = @hst = nil
+  def calculate_order_taxes(province)
+    subtotal = session[:cart].sum do |item|
+      product = Product.find(item["product_id"])
+      product.price * item["quantity"]
     end
+
+    gst = subtotal * province.gst / 100
+    pst_or_hst = subtotal * (province.pst || province.hst) / 100
+    total_price = subtotal + gst + pst_or_hst
+
+    return gst + pst_or_hst, total_price
   end
 end
