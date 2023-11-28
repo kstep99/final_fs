@@ -1,17 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer!, only: [:new, :create]
+  before_action :authenticate_customer!, only: %i[new create]
 
   def new
-    if customer_signed_in?
-      @customer = current_customer
-      # Create a new order object if needed
-      @order = Order.new
-    else
-      redirect_to new_customer_session_path, alert: 'Please sign in to continue.'
-    end
+    # existing code
   end
-
-  # Add other actions as needed, such as create, show, etc.
 
   def calculate_taxes
     province_id = params[:province_id]
@@ -19,23 +11,34 @@ class OrdersController < ApplicationController
 
     tax_amount, total_price = calculate_order_taxes(province)
 
-    render json: { tax_amount: tax_amount, total_price: total_price }
+    render json: { tax_amount:, total_price: }
   rescue ActiveRecord::RecordNotFound
-    render json: { error: "Province not found" }, status: :not_found
+    render json: { error: 'Province not found' }, status: :not_found
   end
 
   private
 
   def calculate_order_taxes(province)
-    subtotal = session[:cart].sum do |item|
-      product = Product.find(item["product_id"])
-      product.price * item["quantity"]
+    subtotal = calculate_cart_subtotal
+
+    gst_amount = calculate_tax(subtotal, province.gst)
+    pst_amount = calculate_tax(subtotal, province.pst)
+    hst_amount = calculate_tax(subtotal, province.hst)
+
+    total_tax = hst_amount > 0 ? hst_amount : (gst_amount + pst_amount)
+    total_price = subtotal + total_tax
+
+    [total_tax, total_price]
+  end
+
+  def calculate_cart_subtotal
+    session[:cart].sum do |item|
+      product = Product.find(item['product_id'])
+      product.price * item['quantity']
     end
+  end
 
-    gst = subtotal * province.gst / 100
-    pst_or_hst = subtotal * (province.pst || province.hst) / 100
-    total_price = subtotal + gst + pst_or_hst
-
-    return gst + pst_or_hst, total_price
+  def calculate_tax(subtotal, tax_rate)
+    tax_rate.present? ? subtotal * (tax_rate / 100.0) : 0
   end
 end
