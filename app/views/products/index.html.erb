@@ -23,6 +23,11 @@
               </div>
             </div>
           <% end %>
+
+                 <!-- Search Form -->
+        <div class="column is-one-third has-text-centered">
+          <%= render 'partials/search' %>
+        </div>
           <%= link_to 'Cart', cart_path, class: 'button is-primary' %>
         </div>
       </div>
@@ -39,10 +44,6 @@
         <!-- Title -->
         <div class="column is-one-third">
           <h1 class="title" style="color: #cecece;">Customer Dashboard</h1>
-        </div>
-        <!-- Search Form -->
-        <div class="column is-one-third has-text-centered">
-          <%= render 'partials/search' %>
         </div>
         <!-- Greeting and Logout and profile and cart -->
         <div class="column is-one-third has-text-right">

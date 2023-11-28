@@ -5,3 +5,5 @@ import '../stylesheets/application'
 
 // You can also include other JavaScript files here
 // import './some_other_file'
+// import './checkout';
+
