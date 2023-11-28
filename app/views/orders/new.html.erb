@@ -4,7 +4,6 @@
 
 <%= javascript_pack_tag 'checkout' %>
 
-
 <% if session[:cart].blank? %>
   <p>Your cart is empty.</p>
 <% else %>
@@ -26,33 +25,66 @@
     </tr>
   </table>
 
-  <!-- Checkout Form -->
-  <%= form_with(url: orders_path, method: :post) do |form| %>
-    <!-- Shipping Information -->
-    <h3>Shipping Information</h3>
+ <!-- Checkout Form -->
+<%= form_with(url: orders_path, method: :post) do |form| %>
+  <!-- Shipping Information -->
+  <h3>Shipping Information</h3>
+  <div>
     <%= form.text_field :name, placeholder: "Full Name", value: @customer&.full_name %>
+  </div>
+  <div>
     <%= form.text_field :address, placeholder: "Address", value: @customer&.address %>
+  </div>
+  <div>
     <%= form.text_field :city, placeholder: "City", value: @customer&.city %>
-
-    <%# <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { placeholder: "Province" } %>
-
-    <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
-
-
+  </div>
+  <div>
     <%= form.text_field :postal_code, placeholder: "Postal Code", value: @customer&.postal_code %>
+  </div>
+  <div>
+    <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
+  </div>
 
+<!-- Shipping Options -->
+<h3>Shipping Options</h3>
+<div>
+  <%= form.radio_button :shipping_option, 'purolator', id: 'shipping_purolator' %>
+  <%= form.label :shipping_option, 'First Class Purolator', value: 'purolator' %>
+  <br>
+  <%= form.radio_button :shipping_option, 'canada_post', id: 'shipping_canada_post' %>
+  <%= form.label :shipping_option, 'Standard Canada Post', value: 'canada_post' %>
+  <br>
+  <%= form.radio_button :shipping_option, 'dhl', id: 'shipping_dhl' %>
+  <%= form.label :shipping_option, 'DHL', value: 'dhl' %>
+</div>
+
+ <!-- Final Invoice Calculations -->
 <div>
   <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
   <p>Total Price: <span id="total_price">$0.00</span></p>
 </div>
 
-    <!-- Payment Information (Placeholder) -->
-    <h3>Payment Information</h3>
-    <%= form.text_field :card_number, placeholder: "Credit Card Number" %>
-    <%= form.text_field :card_expiry, placeholder: "MM/YY" %>
-    <%= form.text_field :card_cvv, placeholder: "CVV" %>
+<!-- Payment Information (Placeholder) -->
+<h3>Payment Information</h3>
+<%= form.text_field :card_number, placeholder: "Credit Card Number" %>
+<%= form.text_field :card_expiry, placeholder: "MM/YY" %>
+<%= form.text_field :card_cvv, placeholder: "CVV" %>
 
-    <!-- Submit Button -->
-    <%= form.submit "Complete Order", class: "button is-primary" %>
-  <% end %>
+<!-- Submit Button -->
+<%= form.submit "Complete Order", class: "button is-primary" %>
 <% end %>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("Customer Data:", <%= @customer.to_json.html_safe %>);
+    console.log("Cart Session:", <%= session[:cart].to_json.html_safe %>);
+    console.log("Form Data:", {
+      fullName: document.querySelector('[name="name"]').value,
+      address: document.querySelector('[name="address"]').value,
+      city: document.querySelector('[name="city"]').value,
+      postalCode: document.querySelector('[name="postal_code"]').value,
+      provinceId: document.querySelector('[name="province_id"]').value
+    });
+  });
+</script>
