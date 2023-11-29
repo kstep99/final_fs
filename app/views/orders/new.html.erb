@@ -9,19 +9,19 @@
 <% else %>
   <!-- Display Cart Items -->
   <h2>Your Cart Items</h2>
-  <table>
-    <% total_price = 0 %>
+ <table>
+    <% subtotal_price = 0 %>
     <% session[:cart].each do |item| %>
       <% product = Product.find(item["product_id"]) %>
       <tr>
         <td><%= product.name %></td>
         <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
       </tr>
-      <% total_price += product.price * item["quantity"] %>
+      <% subtotal_price += product.price * item["quantity"] %>
     <% end %>
     <tr>
-      <td><strong>Total Price:</strong></td>
-      <td><%= number_to_currency(total_price) %></td>
+      <td><strong>SubTotal Price:</strong></td>
+      <td><%= number_to_currency(subtotal_price) %></td>
     </tr>
   </table>
 
@@ -49,20 +49,22 @@
 <h3>Shipping Options</h3>
 <div>
   <%= form.radio_button :shipping_option, 'purolator', id: 'shipping_purolator' %>
-  <%= form.label :shipping_option, 'First Class Purolator', value: 'purolator' %>
+  <%= form.label :shipping_option_purolator, 'First Class Purolator' %> <!-- Corrected label 'for' attribute -->
   <br>
   <%= form.radio_button :shipping_option, 'canada_post', id: 'shipping_canada_post' %>
-  <%= form.label :shipping_option, 'Standard Canada Post', value: 'canada_post' %>
+  <%= form.label :shipping_option_canada_post, 'Standard Canada Post' %> <!-- Corrected label 'for' attribute -->
   <br>
   <%= form.radio_button :shipping_option, 'dhl', id: 'shipping_dhl' %>
-  <%= form.label :shipping_option, 'DHL', value: 'dhl' %>
+  <%= form.label :shipping_option_dhl, 'DHL' %> <!-- Corrected label 'for' attribute -->
 </div>
 
+
  <!-- Final Invoice Calculations -->
-<div>
-  <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
-  <p>Total Price: <span id="total_price">$0.00</span></p>
-</div>
+    <div>
+      <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
+      <p>Shipping Price: <span id="shipping_cost">$0.00</span></p>
+      <p>Total Price: <span id="total_price">$0.00</span></p>
+    </div>
 
 <!-- Payment Information (Placeholder) -->
 <h3>Payment Information</h3>
@@ -71,10 +73,11 @@
 <%= form.text_field :card_cvv, placeholder: "CVV" %>
 
 <!-- Submit Button -->
-<%= form.submit "Complete Order", class: "button is-primary" %>
+ <p><%= form.submit "Complete Order", class: "button is-primary" %> </p>
 <% end %>
 <% end %>
 
+<!-- For debugging the form -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     console.log("Customer Data:", <%= @customer.to_json.html_safe %>);
