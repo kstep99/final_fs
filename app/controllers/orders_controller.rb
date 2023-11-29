@@ -7,6 +7,25 @@ class OrdersController < ApplicationController
     Rails.logger.debug "Customer details: #{@customer.inspect}"
   end
 
+  def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.order_date = Time.now
+    @order.status_id = Status.find_by(name: "Pending").id
+
+    ActiveRecord::Base.transaction do
+      @order.save!
+      add_products_to_order(@order)
+      update_product_quantities
+    end
+
+    # Redirect to a success page or back to cart on failure
+    redirect_to success_path, notice: 'Order was successfully created.'
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error "Order creation failed: #{e.message}"
+    redirect_to cart_path, alert: 'Order could not be created.'
+  end
+
   def calculate_taxes
     province_id = params[:province_id]
     province = Province.find(province_id)
@@ -28,8 +47,11 @@ class OrdersController < ApplicationController
 
   private
 
+  #sort this out later, but the pst_hst thing has to go
+  #gst_amount , now correctly applies pst+gst for correct tax amount
+  #relable these to reflect the correct functionality
   def calculate_order_taxes(subtotal, province)
-    gst_amount = calculate_tax(subtotal, province.gst)
+    gst_amount = calculate_tax(subtotal, province.gst + province.pst)
     pst_or_hst_amount = province.hst.present? ? calculate_tax(subtotal, province.hst) : calculate_tax(subtotal, province.pst)
 
     total_tax = gst_amount + pst_or_hst_amount
