@@ -12,6 +12,9 @@ function updateTotalCosts() {
   const shippingOption = $('input[name="shipping_option"]:checked').val();
   const shippingCost = SHIPPING_COSTS[shippingOption] || 0;
 
+  console.log('Selected shipping option:', shippingOption);
+  console.log('Shipping cost based on option:', shippingCost);
+
   const ajaxUrl = '/calculate_taxes/' + provinceId;
 
   $.ajax({
@@ -20,6 +23,9 @@ function updateTotalCosts() {
     success: function(response) {
       const totalTax = parseFloat(response.tax_amount) || 0;
       const total = parseFloat(subtotalText.replace(/[^0-9.-]+/g, "")) + totalTax + shippingCost;
+
+      console.log('Response from calculate_taxes:', response);
+      console.log('Calculated Total:', total);
 
       $('#tax_amount').text(`$${totalTax.toFixed(2)}`);
       $('#shipping_cost').text(`$${shippingCost.toFixed(2)}`);
@@ -32,8 +38,15 @@ function updateTotalCosts() {
 }
 
 $(document).ready(function() {
-  $('input[name="shipping_option"]').on('change', updateTotalCosts);
-  $('#order_province_id').on('change', updateTotalCosts);
+  $('input[name="shipping_option"]').on('change', function() {
+    console.log('Shipping option changed to:', $(this).val());
+    updateTotalCosts();
+  });
+
+  $('#order_province_id').on('change', function() {
+    console.log('Province dropdown changed to:', $(this).val());
+    updateTotalCosts();
+  });
 
   if ($('#order_province_id').val()) {
     updateTotalCosts();

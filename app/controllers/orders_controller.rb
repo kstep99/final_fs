@@ -61,7 +61,7 @@ class OrdersController < ApplicationController
   end
 
   def calculate_order_taxes(subtotal, province)
-    gst_amount = calculate_tax(subtotal, province.gst)
+    gst_amount = calculate_tax(subtotal, province.gst + province.pst)
     pst_or_hst_amount = province.hst.present? ? calculate_tax(subtotal, province.hst) : calculate_tax(subtotal, province.pst)
 
     total_tax = gst_amount + pst_or_hst_amount

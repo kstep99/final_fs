@@ -37,18 +37,19 @@
       <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
     </div>
 
-    <!-- Shipping Options -->
-    <h3>Shipping Options</h3>
-    <div>
-      <%= form.radio_button :shipping_option, 'purolator', id: 'shipping_purolator' %>
-      <%= form.label :shipping_option_purolator, 'First Class Purolator' %>
-      <br>
-      <%= form.radio_button :shipping_option, 'canada_post', id: 'shipping_canada_post' %>
-      <%= form.label :shipping_option_canada_post, 'Standard Canada Post' %>
-      <br>
-      <%= form.radio_button :shipping_option, 'dhl', id: 'shipping_dhl' %>
-      <%= form.label :shipping_option_dhl, 'DHL' %>
-    </div>
+  <!-- Shipping Options -->
+<h3>Shipping Options</h3>
+<div>
+  <%= form.radio_button :shipping_option, 'purolator', id: 'shipping_purolator', name: 'shipping_option' %>
+  <%= form.label :shipping_option_purolator, 'First Class Purolator' %>
+  <br>
+  <%= form.radio_button :shipping_option, 'canada_post', id: 'shipping_canada_post', name: 'shipping_option' %>
+  <%= form.label :shipping_option_canada_post, 'Standard Canada Post' %>
+  <br>
+  <%= form.radio_button :shipping_option, 'dhl', id: 'shipping_dhl', name: 'shipping_option' %>
+  <%= form.label :shipping_option_dhl, 'DHL' %>
+</div>
+
 
     <!-- Final Invoice Calculations -->
     <div>
