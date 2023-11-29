@@ -28,10 +28,12 @@
     <!-- Shipping Information -->
     <h3>Shipping Information</h3>
     <div>
-      <%= form.text_field :full_name, placeholder: "Full Name", value: @customer&.full_name %>
-      <%= form.text_field :address, placeholder: "Address", value: @customer&.address %>
-      <%= form.text_field :city, placeholder: "City", value: @customer&.city %>
-      <%= form.text_field :postal_code, placeholder: "Postal Code", value: @customer&.postal_code %>
+      <%= form.text_field :full_name, name: "full_name", placeholder: "Full Name", value: @customer&.full_name %>
+
+      <%= form.text_field :address, name: "address", placeholder: "Address", value: @customer&.address %>
+      <%= form.text_field :city, name: "city", placeholder: "City", value: @customer&.city %>
+      <%= form.text_field :postal_code, name: "postal_code", placeholder: "Postal Code", value: @customer&.postal_code %>
+
       <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
     </div>
 
@@ -67,7 +69,6 @@
   <% end %> <!-- End of the form -->
 <% end %>
 
-<!-- Place JavaScript at the end -->
 <%= javascript_pack_tag 'checkout' %>
 
 <!-- Debugging script -->

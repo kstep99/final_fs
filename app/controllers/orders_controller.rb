@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer!, only: %i[new create]
+  before_action :authenticate_customer!, only: [:new, :create]
 
   SHIPPING_COSTS = {
     'purolator' => 10.0,
@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   def new
     @customer = current_customer
-    @order = Order.new  # Instantiate a new Order object for the form
+    @order = Order.new
     Rails.logger.debug "Customer details: #{@customer.inspect}"
   end
 
@@ -19,15 +19,10 @@ class OrdersController < ApplicationController
     @order.order_date = Time.now
     @order.status_id = Status.find_by(name: "Pending").id
 
-    # Calculate subtotal and tax
     subtotal = calculate_cart_subtotal
     tax_amount, _ = calculate_order_taxes(subtotal, Province.find(params[:order][:province_id]))
+    shipping_cost = determine_shipping_cost(params[:order][:shipping_option])
 
-    # Determine the shipping cost
-    shipping_option = params[:order][:shipping_option]
-    shipping_cost = determine_shipping_cost(shipping_option)
-
-    # Set the total price
     @order.total_price = subtotal + tax_amount + shipping_cost
 
     ActiveRecord::Base.transaction do
@@ -36,21 +31,29 @@ class OrdersController < ApplicationController
       update_product_quantities
     end
 
-  # Redirect to the profile page after successful order creation
-  redirect_to profile_path, notice: 'Order was successfully created.'
-rescue ActiveRecord::RecordInvalid => e
-  Rails.logger.error "Order creation failed: #{e.message}"
-  redirect_to cart_path, alert: 'Order could not be created.'
-end
+    redirect_to profile_path, notice: 'Order was successfully created.'
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error "Order creation failed: #{e.message}"
+    redirect_to cart_path, alert: 'Order could not be created.'
+  end
+
+  def calculate_taxes
+    province_id = params[:province_id]
+    province = Province.find_by(id: province_id)
+
+    if province
+      subtotal = calculate_cart_subtotal
+      tax_amount, total_price = calculate_order_taxes(subtotal, province)
+      render json: { tax_amount: tax_amount, total_price: total_price }
+    else
+      render json: { error: "Province not found" }, status: :not_found
+    end
+  end
 
   private
 
   def order_params
     params.require(:order).permit(:total_price, :customer_id, :status_id)
-  end
-
-  def determine_shipping_cost(shipping_option)
-    SHIPPING_COSTS[shipping_option] || 0
   end
 
   def determine_shipping_cost(shipping_option)
@@ -66,11 +69,10 @@ end
   end
 
   def calculate_cart_subtotal
-    subtotal = session[:cart].sum do |item|
+    session[:cart].sum do |item|
       product = Product.find(item['product_id'])
       product.price * item['quantity']
     end
-    subtotal
   end
 
   def calculate_tax(subtotal, tax_rate)
@@ -94,10 +96,5 @@ end
       product = Product.find(item['product_id'])
       product.update(quantity_available: product.quantity_available - item['quantity'])
     end
-  end
-
-  def order_params
-    params.require(:order).permit(:customer_id, :status_id, :total_price,
-                                  shipping_address_attributes: [:address, :city, :postal_code, :province_id])
   end
 end
