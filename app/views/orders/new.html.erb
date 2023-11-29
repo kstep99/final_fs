@@ -7,23 +7,23 @@
 <% if session[:cart].blank? %>
   <p>Your cart is empty.</p>
 <% else %>
-  <!-- Display Cart Items -->
-  <h2>Your Cart Items</h2>
- <table>
-    <% subtotal_price = 0 %>
-    <% session[:cart].each do |item| %>
-      <% product = Product.find(item["product_id"]) %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
-      </tr>
-      <% subtotal_price += product.price * item["quantity"] %>
-    <% end %>
+<!-- Display Cart Items -->
+<h2>Your Cart Items</h2>
+<table>
+  <% subtotal_price = 0 %>
+  <% session[:cart].each do |item| %>
+    <% product = Product.find(item["product_id"]) %>
     <tr>
-      <td><strong>SubTotal Price:</strong></td>
-      <td><%= number_to_currency(subtotal_price) %></td>
+      <td><%= product.name %></td>
+      <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
     </tr>
-  </table>
+    <% subtotal_price += product.price * item["quantity"] %>
+  <% end %>
+  <tr>
+    <td><strong>SubTotal Price:</strong></td>
+    <td id="subtotal"><%= number_to_currency(subtotal_price) %></td> <!-- Added id="subtotal" here -->
+  </tr>
+</table>
 
  <!-- Checkout Form -->
 <%= form_with(url: orders_path, method: :post) do |form| %>
