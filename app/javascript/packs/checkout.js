@@ -2,7 +2,7 @@ console.log('checkout.js loaded');
 
 // Constants for shipping costs
 const SHIPPING_COSTS = {
-  purolator: 10.0, // Example cost
+  purolator: 10.0,
   canada_post: 8.0,
   dhl: 12.0
 };
