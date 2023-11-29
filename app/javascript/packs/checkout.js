@@ -28,9 +28,8 @@ function updateTotalCosts() {
       console.log("Tax Response:", response);
 
       let totalTax = parseFloat(response.tax_amount) || 0;
-      let backendTotal = parseFloat(response.total_price) || 0; // Total price from the backend
-      let shippingCost = $('input[name="shipping_option"]:checked').val() ? SHIPPING_COSTS[$('input[name="shipping_option"]:checked').val()] : 0;
-      let total = backendTotal + shippingCost; // Add shipping cost to backend total
+      let backendTotal = parseFloat(response.total_price) || 0;
+      let total = backendTotal + shippingCost;
 
       console.log('Total Tax:', totalTax, 'Shipping Cost:', shippingCost, 'Total:', total);
 
@@ -41,12 +40,18 @@ function updateTotalCosts() {
     error: function(error) {
       console.error('Error fetching tax info:', error);
     }
-});
+  });
 }
 
 // Ensure the script is executed after the DOM is fully loaded
 $(document).ready(function() {
   console.log('Document ready');
+
+  // Check if the full_name element exists before trying to access its value
+  let fullNameElement = document.querySelector('[name="full_name"]');
+  if (fullNameElement) {
+    console.log("Full Name:", fullNameElement.value);
+  }
 
   // Event listeners for shipping option changes
   $('input[name="shipping_option"]').on('change', function() {
