@@ -1,14 +1,18 @@
-<%= form_with(url: products_path, method: :get, local: true, class: "is-flex is-align-items-center") do |form| %>
-  <div class="field has-addons">
+<%= form_with(url: products_path, method: :get, local: true, class: "search-form") do |form| %>
+  <!-- Separate the text field into its own div -->
+  <div class="field">
     <div class="control">
-      <%= form.text_field :keyword, placeholder: 'Enter keyword', class: "input", value: params[:keyword] %>
-    </div>
-    <div class="control">
-      <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: 'All Categories' }, { class: "select", selected: params[:category_id] } %>
-    </div>
-    <div class="control">
-      <%= form.submit 'Search', class: "button is-info" %>
+      <%= form.text_field :keyword, placeholder: 'Enter keyword', class: "input is-medium", value: params[:keyword] %>
     </div>
   </div>
 
+  <!-- Group the remaining controls together -->
+  <div class="field has-addons">
+    <div class="control">
+      <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: 'All Categories' }, { class: "select is-medium", selected: params[:category_id] } %>
+    </div>
+    <div class="control">
+      <%= form.submit 'Search', class: "button is-info is-medium" %>
+    </div>
+  </div>
 <% end %>

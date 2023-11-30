@@ -3,10 +3,13 @@
 <div class="columns" style="min-height: 100vh;">
 
   <!-- Sidebar with Filter Form -->
-  <div class="column is-2" style="background-color: #5c5c5c; display: flex; flex-direction: column;">
+ <div class="column is-2" style="background: radial-gradient(#cc003a, #40497b); display: flex; flex-direction: column;">
+<%# <div class="column is-2" style="background: linear-gradient(to right, #f50057, rgba(245, 0, 87, 0)); display: flex; flex-direction: column;"> %>
+<%# <div class="column is-2" style="background: linear-gradient(to right, colorStart, colorEnd); display: flex; flex-direction: column;"> %>
+
     <aside class="menu" style="flex-grow: 1; display: flex; flex-direction: column;">
       <div style="padding: 0.75rem;">
-        <p class="menu-label" style="color: #ffffff;">
+        <p class="menu-label" style="color: #8e8e8e;">
           Filter Products
         </p>
         <div class="menu-list">
@@ -28,7 +31,9 @@
         <div class="column is-one-third has-text-centered">
           <%= render 'partials/search' %>
         </div>
-          <%= link_to 'Cart', cart_path, class: 'button is-primary' %>
+        <!-- cart button -->
+       <%= link_to "See Cart", cart_path, class: 'button is-primary custom-cart-button' %>
+
         </div>
       </div>
       <div style="flex-grow: 1;"></div>
@@ -40,16 +45,18 @@
 
     <!-- Customer Dashboard and Authentication Button Section -->
     <% if customer_signed_in? %>
-      <div class="columns is-vcentered is-mobile" style="background-color: #282828; color: white;">
+      <div class="columns is-vcentered is-mobile" style="background-color: #202020; color: #f5558e;">
         <!-- Title -->
         <div class="column is-one-third">
-          <h1 class="title" style="color: #cecece;">Customer Dashboard</h1>
+          <h1 class="title" style="color: #8598ff;">Customer Dashboard</h1>
         </div>
-        <!-- Greeting and Logout and profile and cart -->
+        <!--  profile  -->
         <div class="column is-one-third has-text-right">
-          <%= link_to 'Profile', profile_path, class: 'button is-primary' %>
-          <p class="hello-message">Hello, <%= current_customer.email %></p>
-          <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary logout-button' %>
+          <%= link_to 'Profile', profile_path, class: 'button is-primary custom-profile-button' %>
+        <!-- Greeting  -->
+          <p class="hello-message custom-hello-message">Hello, <%= current_customer.email %></p>
+           <!-- Logout  -->
+        <%= link_to 'Logout', destroy_customer_session_path, method: :delete, class: 'button is-primary custom-logout-button' %>
         </div>
       </div>
     <% else %>
@@ -62,7 +69,7 @@
         <div class="column is-one-third"></div>
         <!-- Login -->
         <div class="column is-one-third has-text-right">
-          <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
+          <%= link_to 'Login', new_customer_session_path, class: 'button is-primary custom-login-button' %>
         </div>
       </div>
     <% end %>

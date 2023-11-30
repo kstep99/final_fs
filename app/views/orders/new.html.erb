@@ -1,88 +1,95 @@
 <!-- app/views/orders/new.html.erb -->
+<section class="section">
+  <div class="container">
+    <h1 class="title">Checkout</h1>
 
-<h1>Checkout</h1>
+    <% if session[:cart].blank? %>
+      <p>Your cart is empty.</p>
+    <% else %>
+      <%= form_with model: @order, url: orders_path, method: :post, class: "box" do |form| %>
 
-<% if session[:cart].blank? %>
-  <p>Your cart is empty.</p>
-<% else %>
-  <%= form_with model: @order, url: orders_path, method: :post do |form| %>
+        <!-- Display Cart Items -->
+        <h2 class="subtitle">Your Cart Items</h2>
+        <table class="table is-fullwidth is-striped">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% subtotal_price = 0 %>
+            <% session[:cart].each do |item| %>
+              <% product = Product.find(item["product_id"]) %>
+              <tr>
+                <td><%= product.name %></td>
+                <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
+              </tr>
+              <% subtotal_price += product.price * item["quantity"] %>
+            <% end %>
+            <tr>
+              <td><strong>SubTotal Price:</strong></td>
+              <td id="subtotal"><%= number_to_currency(subtotal_price) %></td>
+            </tr>
+          </tbody>
+        </table>
 
-    <!-- Display Cart Items -->
-    <h2>Your Cart Items</h2>
-    <table>
-      <% subtotal_price = 0 %>
-      <% session[:cart].each do |item| %>
-        <% product = Product.find(item["product_id"]) %>
-        <tr>
-          <td><%= product.name %></td>
-          <td><%= item["quantity"] %> x <%= number_to_currency(product.price) %></td>
-        </tr>
-        <% subtotal_price += product.price * item["quantity"] %>
-      <% end %>
-      <tr>
-        <td><strong>SubTotal Price:</strong></td>
-        <td id="subtotal"><%= number_to_currency(subtotal_price) %></td>
-      </tr>
-    </table>
+        <!-- Shipping Information -->
+        <h3 class="subtitle">Shipping Information</h3>
+        <div class="field">
+          <%= form.text_field :full_name, name: "full_name", placeholder: "Full Name", value: @customer&.full_name, class: "input" %>
+        </div>
+        <div class="field">
+          <%= form.text_field :address, name: "address", placeholder: "Address", value: @customer&.address, class: "input" %>
+        </div>
+        <div class="field">
+          <%= form.text_field :city, name: "city", placeholder: "City", value: @customer&.city, class: "input" %>
+        </div>
+        <div class="field">
+          <%= form.text_field :postal_code, name: "postal_code", placeholder: "Postal Code", value: @customer&.postal_code, class: "input" %>
+        </div>
+        <div class="field">
+          <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
+        </div>
 
-    <!-- Shipping Information -->
-    <h3>Shipping Information</h3>
-    <div>
-      <%= form.text_field :full_name, name: "full_name", placeholder: "Full Name", value: @customer&.full_name %>
+        <!-- Shipping Options -->
+        <h3 class="subtitle">Shipping Options</h3>
+        <div class="control">
+          <%= form.radio_button :shipping_option, 'purolator', id: 'shipping_purolator', name: 'shipping_option', class: 'radio' %>
+          <%= form.label :shipping_option_purolator, 'First Class Purolator', class: 'radio-label' %>
+          <br>
+          <%= form.radio_button :shipping_option, 'canada_post', id: 'shipping_canada_post', name: 'shipping_option', class: 'radio' %>
+          <%= form.label :shipping_option_canada_post, 'Standard Canada Post', class: 'radio-label' %>
+          <br>
+          <%= form.radio_button :shipping_option, 'dhl', id: 'shipping_dhl', name: 'shipping_option', class: 'radio' %>
+          <%= form.label :shipping_option_dhl, 'DHL', class: 'radio-label' %>
+        </div>
 
-      <%= form.text_field :address, name: "address", placeholder: "Address", value: @customer&.address %>
-      <%= form.text_field :city, name: "city", placeholder: "City", value: @customer&.city %>
-      <%= form.text_field :postal_code, name: "postal_code", placeholder: "Postal Code", value: @customer&.postal_code %>
+        <!-- Final Invoice Calculations -->
+        <div>
+          <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
+          <p>Shipping Price: <span id="shipping_cost">$0.00</span></p>
+          <p>Total Price: <span id="total_price">$0.00</span></p>
+        </div>
 
-      <%= form.collection_select :province_id, Province.all, :id, :name, { selected: @customer&.province_id, include_blank: true }, { id: 'order_province_id', class: 'select' } %>
-    </div>
+        <!-- Payment Information -->
+        <h3 class="subtitle">Payment Information</h3>
+        <div class="field">
+          <%= form.text_field :card_number, placeholder: "Credit Card Number", class: "input" %>
+        </div>
+        <div class="field">
+          <%= form.text_field :card_expiry, placeholder: "MM/YY", class: "input" %>
+        </div>
+        <div class="field">
+          <%= form.text_field :card_cvv, placeholder: "CVV", class: "input" %>
+        </div>
 
-  <!-- Shipping Options -->
-<h3>Shipping Options</h3>
-<div>
-  <%= form.radio_button :shipping_option, 'purolator', id: 'shipping_purolator', name: 'shipping_option' %>
-  <%= form.label :shipping_option_purolator, 'First Class Purolator' %>
-  <br>
-  <%= form.radio_button :shipping_option, 'canada_post', id: 'shipping_canada_post', name: 'shipping_option' %>
-  <%= form.label :shipping_option_canada_post, 'Standard Canada Post' %>
-  <br>
-  <%= form.radio_button :shipping_option, 'dhl', id: 'shipping_dhl', name: 'shipping_option' %>
-  <%= form.label :shipping_option_dhl, 'DHL' %>
-</div>
+        <!-- Submit Button -->
+        <%= form.submit "Complete Order", class: "button is-primary" %>
 
+      <% end %> <!-- End of the form -->
+    <% end %>
 
-    <!-- Final Invoice Calculations -->
-    <div>
-      <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
-      <p>Shipping Price: <span id="shipping_cost">$0.00</span></p>
-      <p>Total Price: <span id="total_price">$0.00</span></p>
-    </div>
-
-    <!-- Payment Information (Placeholder) -->
-    <h3>Payment Information</h3>
-    <%= form.text_field :card_number, placeholder: "Credit Card Number" %>
-    <%= form.text_field :card_expiry, placeholder: "MM/YY" %>
-    <%= form.text_field :card_cvv, placeholder: "CVV" %>
-
-    <!-- Submit Button -->
-    <%= form.submit "Complete Order", class: "button is-primary" %>
-
-  <% end %> <!-- End of the form -->
-<% end %>
-
-<%= javascript_pack_tag 'checkout' %>
-
-<!-- Debugging script -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    console.log("Customer Data:", <%= @customer.to_json.html_safe %>);
-    console.log("Cart Session:", <%= session[:cart].to_json.html_safe %>);
-    console.log("Form Data:", {
-      fullName: document.querySelector('[name="full_name"]').value,
-      address: document.querySelector('[name="address"]').value,
-      city: document.querySelector('[name="city"]').value,
-      postalCode: document.querySelector('[name="postal_code"]').value,
-      provinceId: document.querySelector('#order_province_id').value
-    });
-  });
-</script>
+    <%= javascript_pack_tag 'checkout' %>
+  </div>
+</section>
