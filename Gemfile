@@ -63,6 +63,9 @@ gem 'ruby-vips'
 
 gem 'jquery-rails'
 
+gem 'stripe'
+
+gem 'dotenv-rails', groups: [:development, :test]
 
 # project gems added at start of project
 gem 'activeadmin'
