@@ -1,4 +1,15 @@
 <!-- app/views/orders/new.html.erb -->
+<script src="https://js.stripe.com/v3/"></script>
+
+
+       <%# Go to Stripe button%>
+      <%= form_with url: payments_path, method: :post, local: false do %>
+      <%= button_tag type: 'submit', id: "stripe-checkout-button", class: "button is-primary" do %>
+      Proceed to Payment
+  <% end %>
+<% end %>
+
+
 <section class="section">
   <div class="container">
     <h1 class="title">Checkout</h1>
@@ -7,6 +18,7 @@
       <p>Your cart is empty.</p>
     <% else %>
       <%= form_with model: @order, url: orders_path, method: :post, class: "box" do |form| %>
+
 
         <!-- Display Cart Items -->
         <h2 class="subtitle">Your Cart Items</h2>
@@ -65,6 +77,7 @@
           <%= form.label :shipping_option_dhl, 'DHL', class: 'radio-label' %>
         </div>
 
+
         <!-- Final Invoice Calculations -->
         <div>
           <p>Tax Amount: <span id="tax_amount">$0.00</span></p>
@@ -72,20 +85,8 @@
           <p>Total Price: <span id="total_price">$0.00</span></p>
         </div>
 
-        <!-- Payment Information -->
-        <h3 class="subtitle">Payment Information</h3>
-        <div class="field">
-          <%= form.text_field :card_number, placeholder: "Credit Card Number", class: "input" %>
-        </div>
-        <div class="field">
-          <%= form.text_field :card_expiry, placeholder: "MM/YY", class: "input" %>
-        </div>
-        <div class="field">
-          <%= form.text_field :card_cvv, placeholder: "CVV", class: "input" %>
-        </div>
 
-        <!-- Submit Button -->
-        <%= form.submit "Complete Order", class: "button is-primary" %>
+
 
       <% end %> <!-- End of the form -->
     <% end %>

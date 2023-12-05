@@ -63,9 +63,13 @@ gem 'ruby-vips'
 
 gem 'jquery-rails'
 
+# Stripe payment gems
 gem 'stripe'
+gem 'stripe_event'
 
-gem 'dotenv-rails', groups: [:development, :test]
+group :development, :test do
+  gem 'dotenv-rails'
+end
 
 # project gems added at start of project
 gem 'activeadmin'

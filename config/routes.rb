@@ -33,6 +33,17 @@ Rails.application.routes.draw do
   # Route for calculating taxes
   get '/calculate_taxes/:province_id', to: 'orders#calculate_taxes', as: 'calculate_taxes'
 
+  # For webhooks with stripe
+  post 'webhooks/stripe', to: 'webhooks#stripe'
+
+  # Route for the PaymentsController create action
+  post 'payments', to: 'payments#create', as: 'payments'
+
+  # If you have success and cancel actions
+  get 'payments/success', to: 'payments#success', as: 'payments_success'
+  get 'payments/cancel', to: 'payments#cancel', as: 'payments_cancel'
+
+
   # Resourceful routes for customers with an additional collection route
   resources :customers do
     collection do
