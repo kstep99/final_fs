@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+
   # POST /payments
   def create
     cart_items = session[:cart] || []
