@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'payments/success', to: 'payments#success', as: 'payments_success'
   get 'payments/cancel', to: 'payments#cancel', as: 'payments_cancel'
 
+  get '/users/:id', to: 'users#show', as: 'user_profile'
 
   # Resourceful routes for customers with an additional collection route
   resources :customers do

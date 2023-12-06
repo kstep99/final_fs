@@ -373,19 +373,22 @@ input[type="submit"].button.is-small.is-primary {
 
 .custom-cart-button {
   /* Basic styling */
-  background-color: #010101 !important; /* Adjust the background color */
-  color: #03ff68 !important; /* Adjust the text color */
+
+  background-color: #f50057  !important; /* Adjust the background color */
+  color: #ffffff !important; /* Adjust the text color */
   stroke: 1px;
   border: 4px solid  #7c73b5 !important; /* Adjust the border color and size */
-  padding: 10px 100px !important; /* Adjust the padding */
+  padding: 10px 35px !important; /* Adjust the padding */
   text-decoration: none; /* Remove underline from link */
   display: inline-block !important; /* Allow padding and height adjustments */
   margin-left: 37px;
+  font-size: 20px !important;
+  // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; // Creates an outline effect
 
   /* Hover effect */
   &:hover {
-    background-color: #000000 !important; /* Change for hover - background color */
-    color: #28ff02 !important; /* Change for hover - text color */
+    background-color: #f23678 !important; /* Change for hover - background color */
+    color: #ffffff !important; /* Change for hover - text color */
     border-color: #9facf6 !important; /* Change for hover - border color */
   }
 }
