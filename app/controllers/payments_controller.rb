@@ -1,29 +1,32 @@
 class PaymentsController < ApplicationController
+  before_action :authenticate_customer!
+
   Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
   # POST /payments
   def create
     cart_items = session[:cart] || []
 
-    line_items = cart_items.map do |item|
-      product = Product.find(item["product_id"])
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: product.name,
-            description: product.description,
-          },
-          unit_amount: product.price_in_cents,
-        },
-        quantity: item["quantity"],
-      }
-    end
+    # Calculate total price for the cart
+    subtotal = calculate_cart_subtotal(cart_items)
+    tax_amount = calculate_order_taxes(subtotal, current_customer.province)
+    shipping_cost = determine_shipping_cost(cart_items)
+    total_price = subtotal + tax_amount + shipping_cost
+
+    # Convert total_price to cents for Stripe (if it's in dollars)
+    total_price_cents = (total_price * 100).to_i
+
+    line_items = [{
+      name: "Total Order",
+      amount: total_price_cents,
+      currency: 'usd',
+      quantity: 1
+    }]
 
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: line_items,
-      mode: 'payment',  # Specify the mode for the session
+      mode: 'payment',
       success_url: payments_success_url + '?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: payments_cancel_url
     )
@@ -35,22 +38,64 @@ class PaymentsController < ApplicationController
 
   # GET /payments/success
   def success
-    # Fetch the session ID from the URL query string
     session_id = params[:session_id]
+    stripe_session = Stripe::Checkout::Session.retrieve(session_id)
 
-    # Here, you can implement any logic needed to handle a successful payment,
-    # such as updating an order's status, sending a confirmation email, etc.
+    ActiveRecord::Base.transaction do
+      order = current_customer.orders.create!(
+        order_date: Time.now,
+        total_price: calculate_total_price_from_cart(session[:cart]),
+        status_id: Status.find_by(name: "Pending").id
+      )
 
-    # Redirect to the user's profile page
-    redirect_to profile_path
+      create_order_products(order, session[:cart])
+
+      # Additional logic for post-order creation (like sending confirmation email) goes here
+    end
+
+    redirect_to profile_path, notice: 'Order was successfully created.'
+  rescue Stripe::StripeError, ActiveRecord::RecordInvalid => e
+    Rails.logger.error "Payment or order creation failed: #{e.message}"
+    redirect_to cart_path, alert: 'There was a problem with your order.'
   end
 
   # GET /payments/cancel
   def cancel
-    # This action handles the scenario when a user cancels the payment process.
-    # You can add logic here, like logging the event or updating the order status.
+    # Logic for handling cancellation
+    redirect_to cart_path
+  end
 
-    # Redirect to the cart page or another appropriate page in your application
-    redirect_to cart_path  # Adjust this to where you'd like to redirect users after cancellation
+  private
+
+  # These methods should be adapted from your OrdersController
+  def calculate_cart_subtotal(cart_items)
+    # Implement the logic to calculate the subtotal from cart items
+  end
+
+  def calculate_order_taxes(subtotal, province)
+    # Implement the logic to calculate the taxes based on subtotal and province
+  end
+
+  def determine_shipping_cost(cart_items)
+    # Implement the logic to calculate the shipping cost based on cart items
+  end
+
+  def calculate_total_price_from_cart(cart_items)
+    subtotal = calculate_cart_subtotal(cart_items)
+    tax_amount = calculate_order_taxes(subtotal, current_customer.province)
+    shipping_cost = determine_shipping_cost(cart_items)
+    subtotal + tax_amount + shipping_cost
+  end
+
+  def create_order_products(order, cart_items)
+    cart_items.each do |item|
+      product = Product.find(item['product_id'])
+      order.order_products.create!(
+        quantity: item['quantity'],
+        price: product.price,
+        subtotal: product.price * item['quantity'],
+        product_id: product.id
+      )
+    end
   end
 end
