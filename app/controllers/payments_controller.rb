@@ -3,38 +3,50 @@ class PaymentsController < ApplicationController
 
   Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
-  # POST /payments
-  def create
-    cart_items = session[:cart] || []
+  SHIPPING_COSTS = {
+    'purolator' => 10.0,
+    'canada_post' => 8.0,
+    'dhl' => 12.0
+  }.freeze
 
-    # Calculate total price for the cart
-    subtotal = calculate_cart_subtotal(cart_items)
-    tax_amount = calculate_order_taxes(subtotal, current_customer.province)
-    shipping_cost = determine_shipping_cost(cart_items)
-    total_price = subtotal + tax_amount + shipping_cost
+# POST /payments
+def create
+  cart_items = session[:cart] || []
 
-    # Convert total_price to cents for Stripe (if it's in dollars)
-    total_price_cents = (total_price * 100).to_i
+  # Calculate total price for the cart
+  subtotal = calculate_cart_subtotal(cart_items)
+  tax_amount = calculate_order_taxes(subtotal, current_customer.province)
+  shipping_cost = determine_shipping_cost(cart_items)
+  total_price = subtotal + tax_amount + shipping_cost
 
-    line_items = [{
-      name: "Total Order",
-      amount: total_price_cents,
-      currency: 'usd',
-      quantity: 1
-    }]
-
-    @session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      line_items: line_items,
-      mode: 'payment',
-      success_url: payments_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: payments_cancel_url
-    )
-
-    respond_to do |format|
-      format.js
-    end
+  line_items = cart_items.map do |item|
+    product = Product.find(item['product_id'])
+    {
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: product.name,
+          description: product.description
+        },
+        unit_amount: (product.price * 100).to_i  # Convert to cents
+      },
+      quantity: item['quantity']
+    }
   end
+
+  @session = Stripe::Checkout::Session.create(
+    payment_method_types: ['card'],
+    line_items: line_items,
+    mode: 'payment',
+    success_url: payments_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: payments_cancel_url
+  )
+
+  respond_to do |format|
+    format.js
+  end
+end
+
 
   # GET /payments/success
   def success
