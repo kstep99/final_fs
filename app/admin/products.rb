@@ -93,7 +93,7 @@ ActiveAdmin.register Product do
     active_admin_comments
   end
 
-  # Customize the controller actions, specifically update
+  # Customize the controller actions, specifically update and destroy
   controller do
     def update
       # Handle existing image deletion
@@ -113,6 +113,18 @@ ActiveAdmin.register Product do
       params[:product].delete(:images)
       super
     end
-  end
 
+    def destroy
+      product = Product.find(params[:id])
+
+      # Check if the product is part of any order
+      if product.order_products.exists?
+        # Show a warning message and redirect back
+        redirect_to admin_products_path, alert: "Cannot delete product as it is part of an active order."
+      else
+        # Proceed with the normal destroy action
+        super
+      end
+    end
+  end
 end

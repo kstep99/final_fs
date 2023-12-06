@@ -1,43 +1,49 @@
-# app/controllers/products_controller.rb
 class ProductsController < ApplicationController
   include CartManagement
+  before_action :set_product, only: [:show, :destroy]
   before_action :set_user_dashboard, only: [:index]
 
   def index
-    # Start with all products or a specific category if provided
     @products = params[:category_id].present? ? Product.where(category_id: params[:category_id]) : Product.all
 
-    # Filter by keyword if provided
     if params[:keyword].present?
       @products = @products.where('name LIKE :keyword OR description LIKE :keyword', keyword: "%#{params[:keyword]}%")
     end
 
-    # Apply pagination to the @products query
-    @products = @products.with_attached_images.page(params[:page]).per(10) # Adjust the number per page as needed
+    @products = @products.with_attached_images.page(params[:page]).per(10)
   end
 
-
   def show
-    @product = Product.find(params[:id])
+    # @product is set by the set_product before_action
   end
 
   def add_to_cart
-    product_id = params[:product_id]
     quantity = params[:quantity].to_i
+    product = Product.find_by(id: params[:product_id])
 
-    # Fetch the product and check if it's available
-    product = Product.find_by(id: product_id)
     if product.nil? || quantity <= 0 || quantity > product.quantity_available
       redirect_to product_path(product), alert: 'Invalid quantity or product not available.'
       return
     end
 
-    # Add product to cart, logic handled in the CartManagement concern
-    session[:cart] << { "product_id" => product_id, "quantity" => quantity }
+    session[:cart] << { "product_id" => product.id, "quantity" => quantity }
     redirect_to products_path, notice: 'Product added to cart!'
   end
 
+  def destroy
+    if @product.can_be_deleted?
+      @product.destroy
+      redirect_to products_path, notice: 'Product was successfully deleted.'
+    else
+      redirect_to products_path, alert: 'Product cannot be deleted as it is part of an existing order.'
+    end
+  end
+
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   def set_user_dashboard
     if customer_signed_in?
