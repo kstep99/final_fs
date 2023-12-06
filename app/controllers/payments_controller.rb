@@ -49,6 +49,7 @@ class PaymentsController < ApplicationController
       )
 
       create_order_products(order, session[:cart])
+      update_product_quantities
 
       # Additional logic for post-order creation (like sending confirmation email) goes here
     end
@@ -67,17 +68,26 @@ class PaymentsController < ApplicationController
 
   private
 
-  # These methods should be adapted from your OrdersController
   def calculate_cart_subtotal(cart_items)
-    # Implement the logic to calculate the subtotal from cart items
+    cart_items.sum do |item|
+      product = Product.find(item['product_id'])
+      product.price * item['quantity']
+    end
   end
 
   def calculate_order_taxes(subtotal, province)
-    # Implement the logic to calculate the taxes based on subtotal and province
+    gst_amount = calculate_tax(subtotal, province.gst + province.pst)
+    pst_or_hst_amount = province.hst.present? ? calculate_tax(subtotal, province.hst) : calculate_tax(subtotal, province.pst)
+    gst_amount + pst_or_hst_amount
   end
 
   def determine_shipping_cost(cart_items)
-    # Implement the logic to calculate the shipping cost based on cart items
+    shipping_option = cart_items.first['shipping_option'] # Example, adapt as needed
+    SHIPPING_COSTS[shipping_option] || 0
+  end
+
+  def calculate_tax(subtotal, tax_rate)
+    tax_rate.present? ? subtotal * (tax_rate / 100.0) : 0
   end
 
   def calculate_total_price_from_cart(cart_items)
@@ -96,6 +106,13 @@ class PaymentsController < ApplicationController
         subtotal: product.price * item['quantity'],
         product_id: product.id
       )
+    end
+  end
+
+  def update_product_quantities
+    session[:cart].each do |item|
+      product = Product.find(item['product_id'])
+      product.update(quantity_available: product.quantity_available - item['quantity'])
     end
   end
 end

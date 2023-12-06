@@ -1,42 +1,35 @@
 @import '~bulma/bulma';
 
 .custom-login-button {
-  /* Existing styles */
-  border: 2px solid #444444 !important; /* Adjust the border color */
-  background-color: #2142fe !important; /* Adjust the background color */
-  color: #ffffff; /* Adjust the text color */
+  border: 2px solid #444444 !important;
+  background-color: #2142fe !important;
+  color: #ffffff;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
   margin-right: 10px;
   font-family: 'Terminus', monospace;
 
-
-  /* Hover effect */
   &:hover {
-    border-color: #666666 !important; /* Change for hover - border color */
-    background-color: #77aaff !important; /* Change for hover - background color */
-    color: #e0e0e0; /* Change for hover - text color */
-    /* Add any additional hover styles here */
+    border-color: #666666 !important;
+    background-color: #77aaff !important;
+    color: #e0e0e0;
   }
 }
 
 .custom-profile-button {
-  /* Basic styling */
-  border: 2px solid #000000 !important; /* Adjust the border color */
-  background-color: #3f51b5 !important; /* Adjust the background color */
-  color: #ffffff !important; /* Adjust the text color */
+  border: 2px solid #000000 !important;
+  background-color: #3f51b5 !important;
+  color: #ffffff !important;
   position: relative;
-  top: 57px; /* Adjust to move down */
-  left: 380px; /* Adjust to move left from the right edge */
+  top: 57px;
+  left: 380px;
   font-family: 'Terminus', monospace;
 
-  /* Hover effect */
   &:hover {
-    border-color: #1d1c1c !important; /* Change for hover - border color */
-    background-color: #6570ae !important; /* Change for hover - background color */
-    color: #f0f0f0; /* Change for hover - text color */
-    /* Add any additional hover styles here */
+    border-color: #1d1c1c !important;
+    background-color: #6570ae !important;
+    color: #f0f0f0;
   }
 }
 
@@ -48,7 +41,6 @@
   margin-left: 600px;
   margin-right: -280px;
   font-family: 'Terminus', monospace;
-
 }
 
 /* Custom styles for the logout button */
@@ -61,7 +53,7 @@
   margin-left: 0px;
   margin-right: -490px;
   font-family: 'Terminus', monospace;
-  /* Hover effect */
+
   &:hover {
     border-color: #3b3333 !important;
     background-color: #ee6666 !important;
@@ -83,12 +75,25 @@
 
 
       &:hover {
-        color: #fff;
-        background-color: #282828;
+        color: #bdbdbd;
+        background-color: #000000;
       }
     }
   }
 }
+
+// Navbar title control
+.custom-link-color {
+  color: #4662ff !important;
+  text-shadow: -0.5px 0.5px 0 #cb7979, 0.3px 0.3px 0 #aaaaaa; // Creates an outline effect
+
+
+  &:hover {
+    color: #9dacff  !important;
+    // background-color: #282828 !important;
+  }
+}
+
 
 // Pagination styles
 .pagination {
@@ -138,29 +143,29 @@
       // but it will affect the text color of the selected option in some browsers
       color: #fff;
 
-      // To style the <select> dropdown, you may need to use browser-specific pseudo-elements
+      // To style the <select> dropdown, use browser-specific pseudo-elements
       // Here is an example for Webkit browsers (Chrome, Safari)
       -webkit-appearance: none; // Removes default styling
       background-color: #333; // Dark background for the dropdown
-      border: 1px solid #fff; // White border for the dropdown
+      border: 1px solid #fff; //
       border-radius: 4px; // Rounded corners for the dropdown
       font-family: 'Terminus', monospace !important;
       &:focus {
         outline: none; // Removes the default focus outline
-        border-color: #aaa; // Example: Lighter border color on focus
+        border-color: #aaa;
       }
     }
 
     // If you are using a submit button within the form, you can style it as well
     input[type="submit"] {
-      background-color: #444; // Dark background for the button
-      color: #fff; // White text for the button
-      border: none; // No border for the button
+      background-color: #444;
+      color: #fff;
+      border: none;
       border-radius: 4px; // Rounded corners for the button
       font-family: 'Terminus', monospace !important;
 
       &:hover {
-        background-color: #555; // Slightly lighter background on hover
+        background-color: #555;
       }
     }
   }
@@ -214,9 +219,9 @@
   padding: 10px 83px !important;
 
   &:hover {
-    background-color: #3f5bf6 !important; /* Change for hover - background color */
-    color: #f0f0f0 !important; /* Change for hover - text color */
-    border-color: #9facf6 !important; /* Change for hover - border color */
+    background-color: #3f5bf6 !important;
+    color: #f0f0f0 !important;
+    border-color: #9facf6 !important;
   }
 }
 
@@ -356,37 +361,36 @@ input[type="submit"].button.is-small.is-primary {
 
 .custom-cart-button {
   font-family: 'Terminus', monospace !important;
-  background-color: #f50057  !important; /* Adjust the background color */
-  color: #ffffff !important; /* Adjust the text color */
+  background-color: #f50057  !important;
+  color: #ffffff !important;
   stroke: 1px;
-  border: 4px solid  #7c73b5 !important; /* Adjust the border color and size */
-  padding: 10px 35px !important; /* Adjust the padding */
-  text-decoration: none; /* Remove underline from link */
-  display: inline-block !important; /* Allow padding and height adjustments */
+  border: 4px solid  #7c73b5 !important;
+  padding: 10px 35px !important;
+  text-decoration: none;
+  display: inline-block !important;
   margin-left: 37px;
   font-size: 20px !important;
-
   // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; // Creates an outline effect
 
   /* Hover effect */
   &:hover {
-    background-color: #f23678 !important; /* Change for hover - background color */
-    color: #ffffff !important; /* Change for hover - text color */
-    border-color: #9facf6 !important; /* Change for hover - border color */
+    background-color: #f23678 !important;
+    color: #ffffff !important;
+    border-color: #9facf6 !important;
   }
 }
 
 .search-form .button.is-info.is-medium {
   /* Your custom styles here */
-  background-color: #3244a9 !important; /* Adjust the background color */
-  color: #ffffff !important; /* Adjust the text color */
-  border: 2px solid  #5872ff !important; /* Adjust the border color and size */
-  padding: 10px 30px !important; /* Adjust the padding */
+  background-color: #3244a9 !important;
+  color: #ffffff !important;
+  border: 2px solid  #5872ff !important;
+  padding: 10px 30px !important;
 
   /* Hover effect */
   &:hover {
-    background-color: #3f5bf6 !important; /* Change for hover - background color */
-    color: #f0f0f0 !important; /* Change for hover - text color */
+    background-color: #3f5bf6 !important;
+    color: #f0f0f0 !important;
     border-color: #9facf6 !important;
   }
 }
