@@ -368,6 +368,7 @@ font-size: 13px !important;
 text-align: center;
 }
 
+//button for add to cart
 input[type="submit"].button.is-small.is-primary {
   background-color: #cecece;
   color: #000000;
@@ -381,6 +382,19 @@ input[type="submit"].button.is-small.is-primary {
     border-color: #000000 ;
   }
 }
+
+//card for product
+@media screen and (min-width: 1024px) { /* Adjusts for larger screens */
+  .custom-column-5 {
+    flex: none;
+    width: 18%; /* 100% / 5 */
+    margin-left: 30px;
+    margin-right: 0px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+  }
+}
+
 
 //additional SIDEBAR STYLES, for 'see cart' button and search-form
 .custom-cart-button {

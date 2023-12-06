@@ -79,7 +79,7 @@
     <h2 class="title">Our Products</h2>
     <div class="columns is-multiline">
       <% @products.each do |product| %>
-        <div class="column is-2">
+        <div class="custom-column-5">
           <div class="card">
             <div class="card-content">
               <%= link_to product.name, product_path(product), class: 'product-name title is-5' %>
