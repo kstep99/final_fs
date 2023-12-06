@@ -3,12 +3,14 @@
 .custom-login-button {
   /* Existing styles */
   border: 2px solid #444444 !important; /* Adjust the border color */
-  background-color: #8598ff !important; /* Adjust the background color */
+  background-color: #2142fe !important; /* Adjust the background color */
   color: #ffffff; /* Adjust the text color */
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  font-family: 'Terminus', monospace;
+
 
   /* Hover effect */
   &:hover {
@@ -27,6 +29,7 @@
   position: relative;
   top: 57px; /* Adjust to move down */
   left: 380px; /* Adjust to move left from the right edge */
+  font-family: 'Terminus', monospace;
 
   /* Hover effect */
   &:hover {
@@ -39,54 +42,49 @@
 
 /* Custom styles for the greeting message */
 .custom-hello-message {
-  color: #f5558e; /* Adjust the text color */
-  // border: 2px solid #8e8e8e !important;
-  margin-top: -30px; /* Adjust top margin */
-  margin-bottom: 8px; /* Adjust bottom margin */
-  margin-left: 600px; /* Adjust left margin */
-  margin-right: -280px; /* Adjust right margin */
+  color: #fb2670;
+  margin-top: -30px;
+  margin-bottom: 8px;
+  margin-left: 600px;
+  margin-right: -280px;
+  font-family: 'Terminus', monospace;
 
-  /* Add any additional styles you want */
 }
 
 /* Custom styles for the logout button */
 .custom-logout-button {
-  border: 2px solid #000000 !important; /* Adjust the border color */
-  background-color: #f50057 !important; /* Adjust the background color */
-  color: #ffffff !important; /* Adjust the text color */
-  margin-top: 16px !important; /* Adjust top margin */
-  margin-bottom: -20px; /* Adjust bottom margin */
-  margin-left: 0px; /* Adjust left margin */
-  margin-right: -490px; /* Adjust right margin */
-
+  border: 2px solid #000000 !important;
+  background-color: #f50057 !important;
+  color: #ffffff !important;
+  margin-top: 16px !important;
+  margin-bottom: -20px;
+  margin-left: 0px;
+  margin-right: -490px;
+  font-family: 'Terminus', monospace;
   /* Hover effect */
   &:hover {
-    border-color: #3b3333 !important; /* Change for hover - border color */
-    background-color: #ee6666 !important; /* Change for hover - background color */
-    color: #f0f0f0 !important; /* Change for hover - text color */
+    border-color: #3b3333 !important;
+    background-color: #ee6666 !important;
+    color: #f0f0f0 !important;
   }
 }
 
-
-
-
 // General navbar styles (MAIN MOST TOP BAR)
 .navbar.navbar {
-  background-color: #000000; // Dark background color
+  background-color: #000000;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
 .navbar-menu {
   .navbar-start {
-    // Ensure the navbar items are white
     .navbar-item {
-      color: #fff; // White text color
+      color: #fff;
 
-      // Change the background and text color on hover
+
       &:hover {
-        color: #fff; // Keep the text color white
-        background-color: #282828; // Dark grey background
+        color: #fff;
+        background-color: #282828;
       }
     }
   }
@@ -101,13 +99,13 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #9a9aee; // Light purple on hover
+      background-color: #9a9aee;
       color: #fff !important;
     }
   }
 
   .pagination-link.is-current, .pagination-link.is-current:hover {
-    background-color: #4a4a4a; // Dark grey for current page
+    background-color: #4a4a4a;
     border-color: #4a4a4a;
     color: #fff !important;
   }
@@ -118,11 +116,12 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: #303030; // Purple background for sidebar
+  background-color: #303030;
+  font-family: 'Terminus', monospace;
 
   .menu-label, .menu-list {
     flex-grow: 1;
-    color: #fff; // White text for menu items
+    color: #fff;
   }
 
   // you may want to scope these styles to that context for better control
@@ -145,7 +144,7 @@
       background-color: #333; // Dark background for the dropdown
       border: 1px solid #fff; // White border for the dropdown
       border-radius: 4px; // Rounded corners for the dropdown
-
+      font-family: 'Terminus', monospace !important;
       &:focus {
         outline: none; // Removes the default focus outline
         border-color: #aaa; // Example: Lighter border color on focus
@@ -158,6 +157,7 @@
       color: #fff; // White text for the button
       border: none; // No border for the button
       border-radius: 4px; // Rounded corners for the button
+      font-family: 'Terminus', monospace !important;
 
       &:hover {
         background-color: #555; // Slightly lighter background on hover
@@ -180,12 +180,14 @@
         select {
           width: 100%;
           max-width: 60%;
+          text-align: center;
           box-sizing: border-box;
         }
 
         // Filter button style
         .button.is-link {
           margin-right: 1.5rem; // Space between filter and cart buttons
+          max-width: 60%;
         }
 
         // Cart button style
@@ -206,13 +208,10 @@
   padding-left: 4em;
   padding-right: 4em;
 
-
   background-color: #3244a9 !important;
   color: #ffffff !important;
   border: 2px solid  #5872ff !important;
   padding: 10px 83px !important;
-
-
 
   &:hover {
     background-color: #3f5bf6 !important; /* Change for hover - background color */
@@ -221,8 +220,6 @@
   }
 }
 
-
-
 // Styles for centering pagination and adjusting form sizes
 .pagination-wrapper {
   display: flex;
@@ -230,40 +227,20 @@
   margin-top: 1rem;
 }
 
-
 // Styles for search bar /button spacing
 .field.has-addons .control {
   margin-left: 0.08rem;
 }
-
 //unknown styles, likley for side bar, dont seem to do anything
 .field.has-addons .control:last-child {
   margin-right: 0;
 }
-
-
 .button.is-info {
   margin-left: 0;
 }
-
 .is-flex.is-align-items-center {
   margin: 0.5rem;
 }
-
-
-
-
-
-
-
-// // Styles for CUSTOMER sub_BAR
-// .field.has-addons .control .input,
-// .field.has-addons .control .select select,
-// .field.has-addons .control .button {
-//   padding-top: 8;
-//   padding-bottom: 20;
-// }
-
 
 // Styles for sizing the search bar and dropdown/(search)button
 .search-form {
@@ -278,6 +255,7 @@
       .control {
         &:not(:last-child) {
           margin-right: 5px; // Keep margin for spacing between controls
+
         }
 
         // Customize flex-grow based on the control's content
@@ -287,6 +265,7 @@
 
         &:nth-child(2) {
           flex-grow: 1; // For the category select box
+          font-family: 'Terminus', monospace !important;
         }
 
         &:last-child {
@@ -304,6 +283,7 @@
       width: 100%;
       .control {
         width: 100%;
+
       }
     }
   }
@@ -312,68 +292,70 @@
 
 /* Style for the overall search form */
 .search-form {
-  max-width: 800px; /* Adjust this value for the maximum width of the form */
-  margin: 20px auto; /* Center the form with top and bottom margins */
-  padding: 8px; /* Add padding around the form */
-  display: block; /* Ensures the form takes up the full width it can */
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 8px;
+  display: block;
+
 }
 
 /* Style for the individual field holding the text input */
 .search-form .field:not(.has-addons) {
-  margin-bottom: 15px; /* Adds space below the text field */
+  margin-bottom: 15px;
 }
 
 /* Style for the control containing the text input */
 .search-form .field:not(.has-addons) .control {
-  width: 400%; /* Ensures the text input takes up full width */
+  width: 400%;
+
 }
 
 /* Style for the field with has-addons class - holding category select and search button */
 .search-form .field.has-addons {
-  display: flex; /* Aligns the select and button in a row */
-  justify-content: space-between; /* Spaces out the select and button */
-  align-items: center; /* Vertically centers the select and button */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Style for the controls within the has-addons field */
 .search-form .field.has-addons .control {
-  flex-grow: 1; /* Allows each control to grow and fill the space */
+  flex-grow: 1;
   margin-right: 10px; /* Adds margin between the select and button */
+
 }
 
 /* Removes the margin for the last control in the has-addons field */
 .search-form .field.has-addons .control:last-child {
   margin-right: 0;
+
 }
 
 /* Style for input, select, and button to take full width of their control */
 .search-form .input,
 .search-form .select,
 .search-form .button {
-  width: 100%;
+width: 100%;
+font-family: 'Terminus', monospace !important;
+font-size: 13px !important;
+text-align: center;
 }
 
-
 input[type="submit"].button.is-small.is-primary {
-  /* Basic styling */
-  background-color: #cecece; /* Adjust the background color */
-  color: #000000; /* Adjust the text color */
-  border: 2px solid #000000; /* Adjust the border color and size */
-  padding: 10px 20px; /* Adjust the padding */
+  background-color: #cecece;
+  color: #000000;
+  border: 2px solid #000000;
+  padding: 10px 20px;
 
   /* Hover effect */
   &:hover {
-    background-color: #999999; /* Change for hover - background color */
-    color: #ffffff; /* Change for hover - text color */
-    border-color: #cecece ; /* Change for hover - border color */
+    background-color: #999999;
+    color: #ffffff;
+    border-color: #cecece ;
   }
-
-  /* Add other styles as needed, such as font size, border-radius, etc. */
 }
 
 .custom-cart-button {
-  /* Basic styling */
-
+  font-family: 'Terminus', monospace !important;
   background-color: #f50057  !important; /* Adjust the background color */
   color: #ffffff !important; /* Adjust the text color */
   stroke: 1px;
@@ -383,6 +365,7 @@ input[type="submit"].button.is-small.is-primary {
   display: inline-block !important; /* Allow padding and height adjustments */
   margin-left: 37px;
   font-size: 20px !important;
+
   // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; // Creates an outline effect
 
   /* Hover effect */
@@ -404,6 +387,6 @@ input[type="submit"].button.is-small.is-primary {
   &:hover {
     background-color: #3f5bf6 !important; /* Change for hover - background color */
     color: #f0f0f0 !important; /* Change for hover - text color */
-    border-color: #9facf6 !important; /* Change for hover - border color */
+    border-color: #9facf6 !important;
   }
 }
