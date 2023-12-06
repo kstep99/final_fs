@@ -61,6 +61,22 @@
   }
 }
 
+.custom-dashboard-title {
+  color: #8598ff !important;
+  font-size: 24px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 2px 2px 4px #000000;
+
+  /* Flex properties */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-left: 26px;
+  /* Positioning */
+  position: relative;
+}
+
+
 // General navbar styles (MAIN MOST TOP BAR)
 .navbar.navbar {
   background-color: #000000;
@@ -85,7 +101,7 @@
 // Navbar title control
 .custom-link-color {
   color: #4662ff !important;
-  text-shadow: -0.5px 0.5px 0 #cb7979, 0.3px 0.3px 0 #aaaaaa; // Creates an outline effect
+  text-shadow: -0.5px 0.5px 0 #ff3232, 0.3px 0.3px 0 #aaaaaa; // Creates an outline effect
 
 
   &:hover {
