@@ -145,7 +145,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: #303030;
+  background-color: #3c3c3c;
   font-family: 'Terminus', monospace;
 
   .menu-label, .menu-list {
@@ -376,9 +376,9 @@ input[type="submit"].button.is-small.is-primary {
 
   /* Hover effect */
   &:hover {
-    background-color: #999999;
-    color: #ffffff;
-    border-color: #cecece ;
+    background-color: #bcbcbc;
+    color: rgb(32, 32, 32);
+    border-color: #000000 ;
   }
 }
 
@@ -393,6 +393,7 @@ input[type="submit"].button.is-small.is-primary {
   text-decoration: none;
   display: inline-block !important;
   margin-left: 37px;
+  margin-top: 60px;
   font-size: 20px !important;
   text-shadow: 2px 4px 4px #000000;
   border-radius: 6px;

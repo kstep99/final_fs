@@ -18,6 +18,33 @@ class CartsController < ApplicationController
     end
   end
 
+
+
+
+
+  def update_cart_item
+    product_id = params[:product_id].to_i
+    new_quantity = params[:quantity].to_i
+
+    # Update the quantity of the specified product in the cart
+    update_cart(product_id, new_quantity)
+
+    redirect_to cart_path, notice: 'Cart updated successfully.'
+  end
+
+  def remove_from_cart
+    product_id = params[:product_id].to_i
+
+    # Remove the specified product from the cart
+    remove_product_from_cart(product_id)
+
+    redirect_to cart_path, notice: 'Item removed from cart.'
+  end
+
+  private
+
+
+
   # You could use this method as a before_action filter if needed
   def store_checkout_path
     session[:checkout_path] = new_order_path # Replace with your actual new order path
@@ -25,10 +52,25 @@ class CartsController < ApplicationController
 
   private
 
+
+  def update_cart(product_id, new_quantity)
+    session[:cart].each do |item|
+      if item["product_id"] == product_id
+        item["quantity"] = new_quantity
+        break
+      end
+    end
+  end
+
+  def remove_product_from_cart(product_id)
+    session[:cart].delete_if { |item| item["product_id"] == product_id }
+  end
+end
+
   def calculate_total_price
     session[:cart].sum do |item|
       product = Product.find(item["product_id"])
       product.price * item["quantity"]
     end
   end
-end
+

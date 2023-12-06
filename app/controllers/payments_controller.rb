@@ -57,7 +57,7 @@ def success
     order = current_customer.orders.create!(
       order_date: Time.now,
       total_price: calculate_total_price_from_cart(session[:cart]),
-      status_id: Status.find_by(name: "Pending").id,
+      status_id: Status.find_by(name: "Paid").id,
       stripe_session_id: session_id  # Storing the Stripe session ID
     )
 
