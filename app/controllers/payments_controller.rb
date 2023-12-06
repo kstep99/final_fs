@@ -48,29 +48,32 @@ def create
 end
 
 
-  # GET /payments/success
-  def success
-    session_id = params[:session_id]
-    stripe_session = Stripe::Checkout::Session.retrieve(session_id)
+# GET /payments/success
+def success
+  session_id = params[:session_id]
+  stripe_session = Stripe::Checkout::Session.retrieve(session_id)
 
-    ActiveRecord::Base.transaction do
-      order = current_customer.orders.create!(
-        order_date: Time.now,
-        total_price: calculate_total_price_from_cart(session[:cart]),
-        status_id: Status.find_by(name: "Pending").id
-      )
+  ActiveRecord::Base.transaction do
+    order = current_customer.orders.create!(
+      order_date: Time.now,
+      total_price: calculate_total_price_from_cart(session[:cart]),
+      status_id: Status.find_by(name: "Pending").id,
+      stripe_session_id: session_id  # Storing the Stripe session ID
+    )
 
-      create_order_products(order, session[:cart])
-      update_product_quantities
+    create_order_products(order, session[:cart])
+    update_product_quantities
 
-      # Additional logic for post-order creation (like sending confirmation email) goes here
-    end
-
-    redirect_to profile_path, notice: 'Order was successfully created.'
-  rescue Stripe::StripeError, ActiveRecord::RecordInvalid => e
-    Rails.logger.error "Payment or order creation failed: #{e.message}"
-    redirect_to cart_path, alert: 'There was a problem with your order.'
+    # Additional logic for post-order creation (like sending confirmation email) goes here
   end
+
+  redirect_to profile_path, notice: 'Order was successfully created.'
+rescue Stripe::StripeError, ActiveRecord::RecordInvalid => e
+  Rails.logger.error "Payment or order creation failed: #{e.message}"
+  redirect_to cart_path, alert: 'There was a problem with your order.'
+end
+
+
 
   # GET /payments/cancel
   def cancel
@@ -94,7 +97,7 @@ end
   end
 
   def determine_shipping_cost(cart_items)
-    shipping_option = cart_items.first['shipping_option'] # Example, adapt as needed
+    shipping_option = cart_items.first['shipping_option']
     SHIPPING_COSTS[shipping_option] || 0
   end
 
