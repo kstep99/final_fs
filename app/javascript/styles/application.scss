@@ -1,0 +1,490 @@
+@import '~bulma/bulma';
+@import '../../../../assets/potree/potree/potree';
+
+
+
+
+
+
+//customer dash styles
+.custom-login-button {
+  border: 2px solid #444444 !important;
+  background-color: #2142fe !important;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 100px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 1px 3px 1px #000000;
+  // display: flex !important;
+  flex: 1 !important;
+
+  &:hover {
+    border-color: #666666 !important;
+    background-color: #77aaff !important;
+    color: #e0e0e0;
+  }
+}
+
+// for profile button
+.custom-profile-button {
+  border: 2px solid #000000 !important;
+  background-color: #3f51b5 !important;
+  color: #ffffff !important;
+  position: relative;
+  top: 57px;
+  left: 250px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 1px 3px 1px #000000;
+  //display: flex !important;
+  flex: 1 !important;
+
+
+  &:hover {
+    border-color: #1d1c1c !important;
+    background-color: #6570ae !important;
+    color: #f0f0f0;
+  }
+}
+
+/* Custom styles for the greeting message */
+.custom-hello-message {
+  color: #fb2670;
+  margin-top: -30px;
+  margin-bottom: 8px;
+  margin-left: 600px;
+  margin-right: -180px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 5px 6px 4px #000000;
+  //display: flex !important;
+  flex: 1 !important;
+}
+
+/* Custom styles for the logout button */
+.custom-logout-button {
+  border: 2px solid #000000 !important;
+  background-color: #f50057 !important;
+  color: #ffffff !important;
+  margin-top: 16px !important;
+  margin-bottom: -20px;
+  margin-left: 0px;
+  margin-right: -490px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 1px 2px 1px #000000;
+  //display: flex !important;
+  flex: 1 !important;
+
+  &:hover {
+    border-color: #3b3333 !important;
+    background-color: #ee6666 !important;
+    color: #f0f0f0 !important;
+  }
+}
+
+// for LiDAR button
+.custom-lidar-button {
+  border: 2px solid #000000 !important;
+  background-color: #3f51b5 !important;
+  color: #ffffff !important;
+  position: relative;
+  top: 57px;
+  left: 380px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 1px 3px 1px #000000;
+  // display: flex !important;
+  flex: 1 !important;
+
+  top: 15.5px !important;
+  left: 128px;
+
+  &:hover {
+    border-color: #1d1c1c !important;
+    background-color: #6570ae !important;
+    color: #f0f0f0;
+  }
+}
+
+
+//dash title styles
+.custom-dashboard-title {
+  color: #8598ff !important;
+  font-size: 24px;
+  font-family: 'Terminus', monospace;
+  text-shadow: 2px 2px 4px #000000;
+
+  /* Flex properties */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-left: 26px;
+  /* Positioning */
+  position: relative;
+}
+
+
+// General navbar styles (MAIN MOST TOP BAR)
+.navbar.navbar {
+  background-color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar-menu {
+  .navbar-start {
+    .navbar-item {
+      color: #fff;
+
+
+      &:hover {
+        color: #bdbdbd;
+        background-color: #000000;
+      }
+    }
+  }
+}
+
+// Navbar title control
+.custom-link-color {
+  color: #4662ff !important;
+  text-shadow: -0.5px 0.5px 0 #f58f8f, 0.3px 0.3px 0 #aaaaaa; // Creates an outline effect
+
+
+  &:hover {
+    color: #9dacff  !important;
+    // background-color: #282828 !important;
+  }
+}
+
+
+// Pagination styles
+.pagination {
+  .pagination-link, .pagination-ellipsis {
+    padding: 8px 12px;
+    margin-right: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #9a9aee;
+      color: #fff !important;
+    }
+  }
+
+  .pagination-link.is-current, .pagination-link.is-current:hover {
+    background-color: #4a4a4a;
+    border-color: #4a4a4a;
+    color: #fff !important;
+  }
+}
+
+// Custom sidebar styles
+.menu {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #3c3c3c;
+  font-family: 'Terminus', monospace;
+  //display: flex !important;
+  flex: 1 !important;
+
+  .menu-label, .menu-list {
+    flex-grow: 1;
+    color: #fff;
+  }
+
+
+.menu-list {
+  .form {
+
+
+    .label {
+      color: #fff; // This sets the label text to white (filter products)
+      //display: flex !important;
+  flex: 1 !important;
+    }
+
+    .select {
+      // The color property won't affect the dropdown arrow in <select>,
+      // but it will affect the text color of the selected option in some browsers
+      color: #fff;
+
+      // To style the <select> dropdown, use browser-specific pseudo-elements
+      // Here is an example for Webkit browsers (Chrome, Safari)
+      -webkit-appearance: none; // Removes default styling
+      background-color: #333; // Dark background for the dropdown
+      border: 1px solid #fff; //
+      border-radius: 4px; // Rounded corners for the dropdown
+      font-family: 'Terminus', monospace !important;
+      //display: flex !important;
+     flex: 1 !important;
+      &:focus {
+        outline: none; // Removes the default focus outline
+        border-color: #aaa;
+      }
+    }
+
+    // If you are using a submit button within the form, you can style it as well
+    input[type="submit"] {
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 4px; // Rounded corners for the button
+      font-family: 'Terminus', monospace !important;
+
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+}
+
+  // Styles for the dropdown and buttons in the form in side bar
+  .form {
+    .field {
+      margin-bottom: 1rem; // Space between fields
+      margin-left: 16px;
+      .label {
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      .control {
+        select {
+          width: 100%;
+          max-width: 60%;
+          text-align: center;
+          box-sizing: border-box;
+        }
+
+        // Filter button style
+        .button.is-link {
+          margin-right: 1.5rem; // Space between filter and cart buttons
+          max-width: 60%;
+        }
+
+        // Cart button style
+        .button.is-primary {
+          padding: 0.5em 1em;
+          font-size: 0.4rem;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}
+
+//button in filter on sidebar
+.form .field .control .button.is-link {
+  background-color: #3244a9 !important;
+  color: white;
+  padding-left: 4em;
+  padding-right: 4em;
+
+  background-color: #3244a9 !important;
+  color: #ffffff !important;
+  border: 2px solid  #5872ff !important;
+  padding: 10px 83px !important;
+
+  &:hover {
+    background-color: #3f5bf6 !important;
+    color: #f0f0f0 !important;
+    border-color: #9facf6 !important;
+  }
+}
+
+// Styles for centering pagination and adjusting form sizes
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+// Styles for search bar /button spacing
+.field.has-addons .control {
+  margin-left: 0.08rem;
+}
+//unknown styles, likley for side bar, dont seem to do anything
+.field.has-addons .control:last-child {
+  margin-right: 0;
+}
+.button.is-info {
+  margin-left: 0;
+}
+.is-flex.is-align-items-center {
+  margin: 0.5rem;
+}
+
+// Styles for sizing the search bar and dropdown/(search)button
+.search-form {
+  max-width: 600px;
+  margin: auto;
+
+  .field {
+    &.has-addons {
+      width: 400%;
+      display: flex;
+
+      .control {
+        &:not(:last-child) {
+          margin-right: 5px; // Keep margin for spacing between controls
+
+        }
+
+        // Customize flex-grow based on the control's content
+        &:first-child {
+          flex-grow: 2; // Assuming the search input needs more space
+        }
+
+        &:nth-child(2) {
+          flex-grow: 1; // For the category select box
+          font-family: 'Terminus', monospace !important;
+        }
+
+        &:last-child {
+          flex-grow: 0; // For the search button
+          flex-shrink: 0;
+        }
+
+        .button {
+          width: auto;
+        }
+      }
+    }
+
+    &:not(.has-addons) { // For the separate search field
+      width: 100%;
+      .control {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+/* Style for the overall search form */
+.search-form {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 8px;
+  display: block;
+
+}
+
+/* Style for the individual field holding the text input */
+.search-form .field:not(.has-addons) {
+  margin-bottom: 15px;
+}
+
+/* Style for the control containing the text input */
+.search-form .field:not(.has-addons) .control {
+  width: 400%;
+
+}
+
+/* Style for the field with has-addons class - holding category select and search button */
+.search-form .field.has-addons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style for the controls within the has-addons field */
+.search-form .field.has-addons .control {
+  flex-grow: 1;
+  margin-right: 10px; /* Adds margin between the select and button */
+
+}
+
+/* Removes the margin for the last control in the has-addons field */
+.search-form .field.has-addons .control:last-child {
+  margin-right: 0;
+
+}
+
+//for side bar search bar package
+/* Style for input, select, and button to take full width of their control */
+.search-form .input,
+.search-form .select,
+.search-form .button {
+width: 100%;
+font-family: 'Terminus', monospace !important;
+font-size: 13px !important;
+text-align: center;
+}
+
+//button for add to cart
+input[type="submit"].button.is-small.is-primary {
+  background-color: #cecece;
+  color: #000000;
+  border: 2px solid #000000;
+  padding: 10px 20px;
+
+  /* Hover effect */
+  &:hover {
+    background-color: #bcbcbc;
+    color: rgb(32, 32, 32);
+    border-color: #000000 ;
+  }
+}
+
+//card for product
+@media screen and (min-width: 1024px) { /* Adjusts for larger screens */
+  .custom-column-5 {
+    flex: none;
+    width: 18%; /* 100% / 5 */
+    margin-left: 30px;
+    margin-right: 0px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+  }
+}
+
+
+//additional SIDEBAR STYLES, for 'see cart' button and search-form
+.custom-cart-button {
+  font-family: 'Terminus', monospace !important;
+  background-color: #4434f8  !important;
+  color: #dfdfdf !important;
+  stroke: 1px;
+  border: 4px solid  #7c73b5 !important;
+  padding: 10px 35px !important;
+  text-decoration: none;
+  display: inline-block !important;
+  margin-left: 37px;
+  margin-top: 60px;
+  font-size: 20px !important;
+  text-shadow: 2px 4px 4px #000000;
+  border-radius: 6px;
+  transition: background-color 0.6s;
+  flex-grow: 0;
+  // color: #4662ff !important;
+  text-shadow: 1px 3px 1px #000000;
+  outline: 5px;
+  // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; // Creates an outline effect
+
+  /* Hover effect */
+  &:hover {
+    background-color: #5e6ce8 !important;
+    color: #ffffff !important;
+    border-color: #9facf6 !important;
+    //text-shadow: 3px 3px 1px #000000;
+    outline: 5px;
+    outline-color: #000000;
+  }
+}
+
+.search-form .button.is-info.is-medium {
+  /* Your custom styles here */
+  background-color: #3244a9 !important;
+  color: #ffffff !important;
+  border: 2px solid  #5872ff !important;
+  padding: 10px 30px !important;
+
+  /* Hover effect */
+  &:hover {
+    background-color: #3f5bf6 !important;
+    color: #f0f0f0 !important;
+    border-color: #9facf6 !important;
+  }
+}

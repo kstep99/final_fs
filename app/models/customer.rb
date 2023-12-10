@@ -9,6 +9,8 @@ class Customer < ApplicationRecord
 
   has_many :orders
 
+  has_many :lidar_files, class_name: 'LiDarFile'
+
   # Active Storage association for the image
   has_one_attached :image
 

@@ -1,0 +1,29 @@
+<!-- app/views/lidars/show.html.erb -->
+<h1>View LiDAR</h1>
+<%= stylesheet_link_tag 'potree' %>
+
+<%# //potree veiwer %>
+<div id="potree_render_area"></div>
+
+<p>This is the LiDAR view page.</p>
+<!-- Add more content as needed -->
+<% if @lidar_files.present? %>
+  <select id="lidarFileDropdown" onchange="updateViewer()">
+    <% @lidar_files.each do |file| %>
+      <option value="<%= file.id %>"><%= file.title %></option>
+    <% end %>
+  </select>
+<% else %>
+  <p>No LiDAR files available.</p>
+<% end %>
+
+<div id="potreeViewer">
+  <!-- Potree viewer will be embedded here -->
+</div>
+
+<script>
+function updateViewer() {
+  var selectedFileId = document.getElementById('lidarFileDropdown').value;
+  // Logic to update the Potree viewer based on selected file
+}
+</script>

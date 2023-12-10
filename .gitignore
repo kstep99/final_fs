@@ -41,5 +41,8 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Potree
+app/assets/repo_potree/
+
 
 /.env

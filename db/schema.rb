@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_06_152323) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_10_100839) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -104,6 +104,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_06_152323) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "li_dar_files", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "title", null: false
+    t.string "file_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_li_dar_files_on_customer_id"
+  end
+
   create_table "order_products", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "price"
@@ -162,6 +171,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_06_152323) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "customers"
   add_foreign_key "customers", "provinces", on_delete: :cascade
+  add_foreign_key "li_dar_files", "customers"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers", on_delete: :cascade

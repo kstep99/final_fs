@@ -45,6 +45,10 @@ Rails.application.routes.draw do
 
   get '/users/:id', to: 'users#show', as: 'user_profile'
 
+  # config/routes.rb
+get 'lidar', to: 'lidars#show'
+
+
   # Resourceful routes for customers with an additional collection route
   resources :customers do
     collection do
