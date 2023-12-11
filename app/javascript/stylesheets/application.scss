@@ -1,5 +1,25 @@
 @import '~bulma/bulma';
 
+// body {
+//   background-image: url('../../assets/images/backgrnd4.jpg');
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center center;
+// }
+
+html, body {
+  min-height: 100vh; /* This sets the minimum height of the body to be at least the height of the viewport */
+  margin: 0;
+  padding: 0;
+  background: url('../../assets/images/backgrnd4.jpg') no-repeat center center fixed;
+  background-size: cover; /* Ensures that the background covers the entire area */
+}
+
+/* If your main content is wrapped in a specific container, you can set the minimum height for that container instead */
+.main-container {
+  min-height: 100vh; /* Adjust the class name as per your HTML structure */
+}
+
 //customer dash styles
 .custom-login-button {
   border: 2px solid #444444 !important;
@@ -58,7 +78,7 @@
 /* Custom styles for the logout button */
 .custom-logout-button {
   border: 2px solid #000000 !important;
-  background-color: #f50057 !important;
+  background-color: #ff0f8b !important;
   color: #ffffff !important;
   margin-top: 16px !important;
   margin-bottom: -20px;
@@ -71,7 +91,7 @@
 
   &:hover {
     border-color: #3b3333 !important;
-    background-color: #ee6666 !important;
+    background-color: #ff0f8ba8 !important;
     color: #f0f0f0 !important;
   }
 }
@@ -158,19 +178,55 @@
     margin-right: 4px;
     border-radius: 4px;
     transition: background-color 0.2s;
+    color: #e2e2e2 !important;
 
     &:hover {
-      background-color: #9a9aee;
+      background-color: #4040c8;
       color: #fff !important;
     }
   }
 
-  .pagination-link.is-current, .pagination-link.is-current:hover {
-    background-color: #4a4a4a;
-    border-color: #4a4a4a;
+  .pagination-link.is-current {
+    background-color: #3f3f3f;
+    border-color: #d1d1d1;
     color: #fff !important;
+
+    &:hover {
+      background-color: #2c2c2c;
+      border-color: #c3c3c3 !important;
+      color: #fff !important;
+    }
   }
+
+  // Style for the "Next" button
+  .pagination-next {
+    padding: 8px 12px;
+    margin-right: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    color: #e2e2e2 !important;
+
+    &:hover {
+      background-color: #6161c7;
+      color: #fff !important;
+    }
+  }
+
+    // Style for the "Next" button
+    .pagination-previous {
+      padding: 8px 12px;
+      margin-right: 4px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      color: #e2e2e2 !important;
+
+      &:hover {
+        background-color: #2727cc;
+        color: #fff !important;
+      }
+    }
 }
+
 
 // Custom sidebar styles
 .menu {
@@ -431,6 +487,7 @@ input[type="submit"].button.is-small.is-primary {
     margin-right: 0px;
     margin-top: 25px;
     margin-bottom: 5px;
+
   }
 }
 
@@ -480,5 +537,212 @@ input[type="submit"].button.is-small.is-primary {
     background-color: #3f5bf6 !important;
     color: #f0f0f0 !important;
     border-color: #9facf6 !important;
+  }
+}
+
+// SCSS for titles
+.title {
+
+  &.is-5 { // Specific styles for smaller titles, if needed
+    // Custom styles for smaller titles
+  color: #ffffff !important;
+  font-weight: bold;
+  font-family: 'Terminus', monospace !important;
+  }
+}
+
+// Specific styling for "Welcome to Our Store"
+h1.title {
+  font-size: 34px;
+  color: #e7e7e7 !important;
+  font-weight: bold;
+  margin-left: 21px;
+  font-family: 'Terminus', monospace !important;
+}
+
+// Specific styling for "Our Products"
+h2.title {
+  font-size: 24px;
+  color: #c5c5c5 !important;
+  font-weight: bold;
+  margin-left: 21px;
+  font-family: 'Terminus', monospace !important;
+}
+
+// SCSS for "Total Price" text specifically
+.total-price-text {
+  color: #e4e4e4;
+  font-weight: bold;
+
+}
+
+// for product name on card
+.product-name.title.is-5 {
+  font-size: 1.2rem;
+  color: #333333 !important;
+  font-weight: bold;
+
+  // Additional styling options:
+  // text-transform: uppercase; // Uncomment to make the text uppercase
+  // margin-bottom: 15px;       // Adjust bottom margin
+  // text-align: center;        // Center the text if desired
+  // Add any other styles you need
+}
+
+//Cart page styles
+//your cart styles
+.container h1.title {
+  // font-size: 2rem;
+  color: #c4c4c4;
+  font-family: 'Terminus', monospace !important;
+}
+
+//cart is emtpy text
+p.empty-cart-message {
+  font-size: 1.25rem;
+  color: #ededed !important;
+  text-align: Left;
+  // width: 100%;
+  font-family: 'Terminus', monospace !important;
+  // font-size: 13px !important;
+}
+
+
+// Styles for Devise login, edit, and signup
+.devise-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Terminus', monospace !important;
+
+  .devise-form {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      color: #d60000; // Light grey color for titles
+    }
+
+    .field {
+      margin-bottom: 15px;
+      background-color: #f70808 !important;
+      color: rgb(83, 31, 171) !important;
+      padding: 15px 30px;        // Adjust padding for larger size
+      border-radius: 8px;        // Rounded corners
+      font-size: 1.2em;          // Larger font size
+      font-weight: bold;         // Bold font
+      transition: background-color 0.3s ease, color 0.3s ease; // Smooth transition for hover effect
+    }
+
+    .actions {
+      text-align: center;
+
+      .button {
+        background-color: #f70808 !important;
+        color: rgb(83, 31, 171) !important;
+        padding: 10px 20px; // Padding around the text
+        border: none; // No border
+        border-radius: 4px; // Rounded corners
+        font-size: 1em; // Font size for the button
+        cursor: pointer; // Cursor changes to pointer on hover
+        transition: background-color 0.3s ease; // Smooth transition for hover effect
+
+        &:hover {
+          background-color: darken(#3273dc, 10%); // Darken the background on hover
+        }
+
+        &:focus {
+          outline: none; // Remove focus outline
+          box-shadow: 0 0 0 0.125em rgba(#3273dc, 0.25); // Focus shadow effect
+        }
+      }
+    }
+
+    label, input, em {
+      color: #000000; // Off white color for text
+    }
+  }
+}
+
+
+//for stripe checkout button
+// For the parent container of the page (adjust the selector as needed)
+.page-container {
+  display: flex;             // Use flex layout
+  flex-direction: column;    // Stack children vertically
+  min-height: 100vh;         // Full viewport height
+  position: relative;        // Positioning context for the button
+}
+
+// For the main content (excluding the button)
+.main-content {
+  flex: 1;                   // Take up all available space
+  // Add any additional styles for your main content here
+}
+
+// For the stripe checkout button
+#stripe-checkout-button {
+  background-color: #3273dc;     // Primary color
+  color: #fff;                   // Text color
+  padding: 10px 15px;            // Padding
+  // border: #000000 !important;               // No border
+  border-radius: 4px;            // Rounded corners
+  font-size: 16px;               // Font size
+  cursor: pointer;               // Pointer cursor
+  transition: background-color 0.3s ease; // Transition effect
+  margin: 10px;
+  position: absolute;            // Absolute position
+  bottom: 10px;                  // 10px from the bottom
+  left: 50%;                     // Centered horizontally
+  transform: translateX(-50%);   // Adjust horizontal position
+  z-index: 10;                   // Ensure it's above other elements
+  font-family: 'Terminus', monospace !important;
+
+  &:hover {
+    background-color: darken(#3273dc, 10%); // Darken on hover
+  }
+
+  &:focus {
+    outline: none;               // Remove focus outline
+    box-shadow: 0 0 0 0.125em rgba(#3273dc, 0.25); // Focus shadow
+  }
+}
+
+
+//For the checkout button of page: checkout
+.button.is-primary.is-large {
+  // Example custom styles:
+
+  background-color: #4a90e2;  // Change the background color
+  color: white;              // Change the text color
+  padding: 15px 30px;        // Adjust padding for larger size
+  border-radius: 8px;        // Rounded corners
+  font-size: 1.2em;          // Larger font size
+  font-weight: bold;         // Bold font
+  transition: background-color 0.3s ease, color 0.3s ease; // Smooth transition for hover effect
+  font-family: 'Terminus', monospace !important;
+
+
+  &:hover {
+    background-color: #3a7bd5; // Slightly darker shade on hover
+    color: #eef;               // Lighten the text color on hover
+  }
+
+  &:focus {
+    outline: none;            // Remove focus outline
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5); // Custom focus style
+  }
+
+  &:active {
+    background-color: #3272c9; // Even darker on active/click
+    border: 2px solid #050505 !important;
+  }
+
+  &:disabled {
+    background-color: #ccc;   // Disabled state style
+    color: #999;
+    cursor: not-allowed;
   }
 }

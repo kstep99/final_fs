@@ -1,14 +1,15 @@
 <!-- app/views/orders/new.html.erb -->
 <script src="https://js.stripe.com/v3/"></script>
 
-
+<div class="page-container">
+  <div class="main-content">
        <%# Go to Stripe button%>
       <%= form_with url: payments_path, method: :post, local: false do %>
       <%= button_tag type: 'submit', id: "stripe-checkout-button", class: "button is-primary" do %>
       Proceed to Payment
   <% end %>
 <% end %>
-
+ </div>
 
 <section class="section">
   <div class="container">
@@ -84,7 +85,7 @@
           <p>Shipping Price: <span id="shipping_cost">$0.00</span></p>
           <p>Total Price: <span id="total_price">$0.00</span></p>
         </div>
-
+ </div>
 
 
 

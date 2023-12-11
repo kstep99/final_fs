@@ -4,7 +4,7 @@
     <h1 class="title">Your Cart</h1>
 
     <% if session[:cart].empty? %>
-      <p>Your cart is empty.</p>
+    <p class="empty-cart-message">Your cart is empty.</p>
     <% else %>
       <table class="table is-fullwidth is-striped">
         <thead>
@@ -38,7 +38,8 @@
           <% end %>
         </tbody>
       </table>
-      <p class="is-size-4">Total Price: <%= number_to_currency(@total_price) %></p>
+      <p class="is-size-4 total-price-text">Total Price: <%= number_to_currency(@total_price) %></p>
+
 
       <%= link_to 'Checkout', initiate_checkout_path, class: 'button is-primary is-large' %>
     <% end %>
