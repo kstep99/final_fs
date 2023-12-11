@@ -48,8 +48,6 @@ Rails.application.routes.draw do
   # config/routes.rb
 get 'lidar', to: 'lidars#show'
 
-# # config/routes.rb
-# get 'lidar_viewer', to: 'lidars#viewer', as: 'lidar_viewer'
 
 # config/routes.rb
 get 'lidar_viewer/:file_name', to: 'lidars#viewer', as: 'lidar_viewer'

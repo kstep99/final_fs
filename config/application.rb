@@ -21,7 +21,7 @@ module Ult6Crm
 
     # Add the following line to include your CSS file in asset precompilation
     config.assets.paths << Rails.root.join("app/assets")
-    config.assets.precompile += %w( potree.css )
+    # config.assets.precompile += %w( potree.css )
 
   end
 end
