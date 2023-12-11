@@ -42,8 +42,12 @@ yarn-debug.log*
 .yarn-integrity
 
 # Potree
-app/assets/
-# app/assets/repo_potree/
+# app/assets/
+app/assets/repo_potree/
+app/assets/lin_po/
 
-/public/
+# for public on project root /public/
+/public/potree/smm_maamawi/
+/public/potree/_retired/
+/public/potree/libs/
 /.env
