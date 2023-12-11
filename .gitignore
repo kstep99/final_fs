@@ -45,6 +45,7 @@ yarn-debug.log*
 # app/assets/
 app/assets/repo_potree/
 app/assets/lin_po/
+app/assets/unused_bg/
 
 # for public on project root /public/
 /public/potree/smm_maamawi/
