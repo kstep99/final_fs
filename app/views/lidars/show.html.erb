@@ -1,29 +1,30 @@
 <!-- app/views/lidars/show.html.erb -->
 <h1>View LiDAR</h1>
-<%= stylesheet_link_tag 'potree' %>
-
-<%# //potree veiwer %>
-<div id="potree_render_area"></div>
+<%# <%= stylesheet_link_tag 'potree' %>
 
 <p>This is the LiDAR view page.</p>
-<!-- Add more content as needed -->
-<% if @lidar_files.present? %>
-  <select id="lidarFileDropdown" onchange="updateViewer()">
-    <% @lidar_files.each do |file| %>
-      <option value="<%= file.id %>"><%= file.title %></option>
-    <% end %>
-  </select>
-<% else %>
-  <p>No LiDAR files available.</p>
-<% end %>
+<!-- LiDAR Dropdown -->
+<%# <select id="lidarDropdown" onchange="alert(this.value)">
+  <option value="" disabled selected>Choose LiDAR file</option>
+  <option value="option1">Cannabridge</option>
+  <option value="option2">Option 2</option>
+</select> %>
 
-<div id="potreeViewer">
-  <!-- Potree viewer will be embedded here -->
-</div>
+
+<%= link_to 'View SMM Maamawi LiDAR', lidar_viewer_path(file_name: 'smm_maamawi'), target: '_blank', class: 'btn btn-primary' %>
+
+
+
+<!-- Example view file, e.g., app/views/lidars/show.html.erb -->
+<%# <% @lidar_files.each do |file|
+  <%# <%= link_to smm_maamawi.html, lidar_viewer_path(file_name: smm_maamawi.html), target: '_blank' %>
+<%# <% end %>
+
+
+
 
 <script>
-function updateViewer() {
-  var selectedFileId = document.getElementById('lidarFileDropdown').value;
-  // Logic to update the Potree viewer based on selected file
-}
+  document.getElementById('lidarDropdown').addEventListener('change', function() {
+    alert(this.value);
+  });
 </script>

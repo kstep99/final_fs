@@ -29,7 +29,7 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets
+# /public/assets
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
@@ -42,7 +42,8 @@ yarn-debug.log*
 .yarn-integrity
 
 # Potree
-app/assets/repo_potree/
+app/assets/
+# app/assets/repo_potree/
 
-
+/public/
 /.env
