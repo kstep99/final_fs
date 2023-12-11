@@ -608,64 +608,16 @@ p.empty-cart-message {
 }
 
 
-// Styles for Devise login, edit, and signup
-.devise-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: 'Terminus', monospace !important;
 
-  .devise-form {
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+//devise styles : login
+.devise-links a {
+  color: #ffffff !important;
 
-    h2 {
-      color: #d60000; // Light grey color for titles
-    }
-
-    .field {
-      margin-bottom: 15px;
-      background-color: #f70808 !important;
-      color: rgb(83, 31, 171) !important;
-      padding: 15px 30px;        // Adjust padding for larger size
-      border-radius: 8px;        // Rounded corners
-      font-size: 1.2em;          // Larger font size
-      font-weight: bold;         // Bold font
-      transition: background-color 0.3s ease, color 0.3s ease; // Smooth transition for hover effect
-    }
-
-    .actions {
-      text-align: center;
-
-      .button {
-        background-color: #f70808 !important;
-        color: rgb(83, 31, 171) !important;
-        padding: 10px 20px; // Padding around the text
-        border: none; // No border
-        border-radius: 4px; // Rounded corners
-        font-size: 1em; // Font size for the button
-        cursor: pointer; // Cursor changes to pointer on hover
-        transition: background-color 0.3s ease; // Smooth transition for hover effect
-
-        &:hover {
-          background-color: darken(#3273dc, 10%); // Darken the background on hover
-        }
-
-        &:focus {
-          outline: none; // Remove focus outline
-          box-shadow: 0 0 0 0.125em rgba(#3273dc, 0.25); // Focus shadow effect
-        }
-      }
-    }
-
-    label, input, em {
-      color: #000000; // Off white color for text
-    }
+  &:hover {
+    // background-color: darken(#535a65, 10%); // Darken on hover
+    color: #acacac !important;
   }
 }
-
 
 //for stripe checkout button
 // For the parent container of the page (adjust the selector as needed)

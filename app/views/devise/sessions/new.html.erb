@@ -21,10 +21,12 @@
       <% end %>
 
       <div class="field">
-        <%= f.submit "Log in", class: 'button is-primary' %>
+        <%= f.submit "Log in", class: 'button is-primary custom-login-button' %>
       </div>
     <% end %>
 
-    <%= render "devise/shared/links" %>
+   <div class="devise-links">
+  <%= render "devise/shared/links" %>
+</div>
   </div>
 </div>
